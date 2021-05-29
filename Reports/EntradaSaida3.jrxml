@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EntradaSaida3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8f0e5a63-1132-4e45-a18f-38abcb98ea36">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+ES.en_id,
+ES.en_data_en,en_data_sai,en_chave,en_auto,en_porteiro,
+PES.pc_nome
+from  entrada_saida as ES
+inner join pessoas_cadastro as PES
+on(PES.pc_id = ES.pc_id)
+order by en_id;]]>
+	</queryString>
+	<field name="en_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_data_en" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_data_sai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_chave" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_auto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_porteiro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pc_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="236" height="106" uuid="e00ad58f-2638-46b8-b615-d474ed43f942"/>
+				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="260" y="37" width="184" height="35" uuid="ec933221-481a-409f-a298-31197253b184"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Entrada e Saida]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="459" y="0" width="100" height="20" uuid="9c2af99d-2a7f-4c13-b91e-c658fb853e45"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="d297b667-de45-4a3a-93c0-c08f2e2f7d56"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID E/S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="0" width="100" height="20" uuid="fa9cb4d5-5398-4d02-b80d-8084af90986f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="0" width="100" height="20" uuid="91a063e3-c22f-4e63-a6c6-739abdcf500a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="0" width="100" height="20" uuid="40b8b3c6-669a-4f35-8e39-53b172dbc114"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Autorização]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="0" width="100" height="20" uuid="f565b88c-bc1d-4903-9633-47dbbb2fc735"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Porteiro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="0" width="100" height="20" uuid="d9dfb957-b762-400e-bd2a-448255d7b246"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="603" y="0" width="100" height="20" uuid="c9708ef6-e619-4976-968c-e377fbe0ed3e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Saida]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="56deab1c-740a-4479-8340-4dd3f741445c"/>
+				<textFieldExpression><![CDATA[$F{en_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="100" height="20" uuid="6fd18127-d699-46b7-b3d2-67d133808e68"/>
+				<textFieldExpression><![CDATA[$F{pc_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="0" width="100" height="20" uuid="7a5a22a4-8902-4290-93a5-a700b17ccaea"/>
+				<textFieldExpression><![CDATA[$F{en_chave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="0" width="100" height="20" uuid="3bf85abb-9959-4c86-ba8c-bcfba6de4616"/>
+				<textFieldExpression><![CDATA[$F{en_auto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="0" width="100" height="20" uuid="a62999e9-5dc1-4fbc-8f01-9c9f03097b1a"/>
+				<textFieldExpression><![CDATA[$F{en_porteiro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="0" width="100" height="20" uuid="0724a061-e18f-40d3-a37f-d11cbe046484"/>
+				<textFieldExpression><![CDATA[$F{en_data_en}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="603" y="0" width="100" height="20" uuid="672ac47a-88de-4f90-8ca4-2cd173793715"/>
+				<textFieldExpression><![CDATA[$F{en_data_sai}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="336" y="34" width="80" height="20" uuid="1f52ddc2-7d3d-4e2e-95d8-5f67a6bd6f5e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="416" y="34" width="40" height="20" uuid="b1a6ee4d-0554-4ade-a119-563352f8d257"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

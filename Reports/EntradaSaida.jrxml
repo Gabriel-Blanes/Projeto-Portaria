@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EntradaSaida" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce1459d1-33c7-4f3a-94b8-2c76e7a66f92">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+ES.en_id,
+ES.en_data_en,en_data_sai,
+PES.pc_nome,pc_empresa
+from  entrada_saida as ES
+inner join pessoas_cadastro as PES
+on(PES.pc_id = ES.pc_id)
+order by en_id;]]>
+	</queryString>
+	<field name="en_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_data_en" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_data_sai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pc_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pc_empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="en_id">
+		<groupExpression><![CDATA[$F{en_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="242" y="32" width="184" height="35" uuid="710df3bc-f7e6-4b7e-9b1e-53f69f321c8e"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Entrada e Saida]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="078bacfa-5b51-4026-8152-4bef70b9d2a4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="236" height="106" uuid="c3b77f67-2032-4693-902f-1618f6d692ee"/>
+				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="58" height="20" uuid="7c160ffb-f5df-498f-9078-fa9312e59b92"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID E/S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="0" width="150" height="20" uuid="333d7a47-cff9-4abd-b2ca-d3fd090ac5b3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="2" width="100" height="20" uuid="d0cde15e-f6f2-4231-b23f-62bfcd94633e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="2" width="100" height="20" uuid="2e2aeb8b-e4de-4dfd-ace7-eea1fd7ab548"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Saida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="2" width="100" height="20" uuid="f2441e35-6805-4879-a9d5-88f9920c418d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="58" height="20" uuid="83db01ca-692c-435b-bf83-dfd1b5aa6208"/>
+				<textFieldExpression><![CDATA[$F{en_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="0" width="150" height="20" uuid="e34c754f-785e-4933-9706-e0657662ffb6"/>
+				<textFieldExpression><![CDATA[$F{pc_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="0" width="100" height="20" uuid="318335e9-7050-4d8f-a0eb-7194e21bdb18"/>
+				<textFieldExpression><![CDATA[$F{en_data_en}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="556eebed-a156-47ec-bd92-8e7637f1ef11"/>
+				<textFieldExpression><![CDATA[$F{en_data_sai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="0" width="100" height="20" uuid="287c67e6-c3fe-4aa2-a348-7be8f20d5781"/>
+				<textFieldExpression><![CDATA[$F{pc_empresa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="426" y="34" width="80" height="20" uuid="9f4d85c0-6fe1-4cf0-8ffa-0c13457bcef0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="506" y="34" width="40" height="20" uuid="6fc2d3f5-2875-4696-8239-a43689328379"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

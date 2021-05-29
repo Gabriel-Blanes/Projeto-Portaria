@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EntradaSaida2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5bfef314-aada-4db8-b328-4da63ef8872b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+ES.en_id,
+ES.en_data_en,en_data_sai,en_meio_transporte,
+PES.pc_nome,pc_empresa
+from  entrada_saida as ES
+inner join pessoas_cadastro as PES
+on(PES.pc_id = ES.pc_id)
+order by en_id;]]>
+	</queryString>
+	<field name="en_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_data_en" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_data_sai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_meio_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pc_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pc_empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="236" height="106" uuid="d79d3ae2-7dee-4906-b043-9861bce99af7"/>
+				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="252" y="42" width="184" height="35" uuid="5c9e86a4-1e47-4c68-97ae-8d7711ab95c3"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Entrada e Saida]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="bf33c879-9296-43f1-b0f1-4571619ef7ed"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="43" y="0" width="100" height="20" uuid="c3ae4cac-322b-4f7e-acd5-8856699948c8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="0" width="92" height="20" uuid="0a418119-831d-4962-a94f-4a6638ae336e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Meio de Trans]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="336" y="0" width="100" height="20" uuid="609226c9-d05d-45e9-b8d6-15dfc309d605"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="74005b95-ebee-400f-83ec-6015078a7e2d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="574" y="0" width="100" height="20" uuid="1ef213de-8e32-42d7-bfaa-53b8100c5323"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Saida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="55" height="20" uuid="8af75c3e-012a-4782-81b7-86e9213b6009"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID E/S]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="43" y="0" width="136" height="20" uuid="a32208eb-4ed6-4d84-b0cc-52846880d010"/>
+				<textFieldExpression><![CDATA[$F{pc_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="206" y="0" width="114" height="20" uuid="4a9c46b1-d9c1-4779-8084-ef934ffa1ff9"/>
+				<textFieldExpression><![CDATA[$F{en_meio_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="0" width="100" height="20" uuid="01dc9044-692e-4f0b-b1d5-59f05bdec83a"/>
+				<textFieldExpression><![CDATA[$F{pc_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="14f5f9ff-823b-4f15-9d78-409db5425beb"/>
+				<textFieldExpression><![CDATA[$F{en_data_en}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="574" y="0" width="100" height="20" uuid="13f5acb9-07c1-4e80-a3c3-564b8639c43d"/>
+				<textFieldExpression><![CDATA[$F{en_data_sai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="55" height="20" uuid="14f566c6-2799-44d3-8446-6898b5a35bbe"/>
+				<textFieldExpression><![CDATA[$F{en_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="346" y="34" width="80" height="20" uuid="a1250903-f0f7-43af-961b-a09527f7cfc7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="426" y="34" width="40" height="20" uuid="64bf43d2-5e52-4d0d-bc50-b75ab8067c1b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
