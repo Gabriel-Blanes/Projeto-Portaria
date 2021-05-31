@@ -69,7 +69,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="28" pref="263" max="32767" attributes="0"/>
+              <EmptySpace min="28" pref="268" max="32767" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
           </Group>
@@ -111,7 +111,7 @@
                   <Component id="btnUsuUpdate" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnUsuDelete" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="138" max="32767" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

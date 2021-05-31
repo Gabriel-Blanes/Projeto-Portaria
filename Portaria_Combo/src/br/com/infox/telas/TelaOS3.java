@@ -320,7 +320,11 @@ private  void getCbDados()
     {
     
     }
-       
+        
+               
+               
+               
+               
        
     }
     @SuppressWarnings("unchecked")
@@ -466,6 +470,7 @@ private  void getCbDados()
 
         cbOSPl.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOSPl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "EVA 2366 ÔNIX", "EXU 1948 ÔNIX", "FHE 1321 TOWNER", "FZH 0439 QQ", "FWF-7005 FIAT", " " }));
+        cbOSPl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbOSPl.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbOSPlItemStateChanged(evt);
@@ -486,6 +491,7 @@ private  void getCbDados()
 
         cbOsSit.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Na planta", "Encerrada" }));
+        cbOsSit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbOsSit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbOsSitMouseClicked(evt);
@@ -540,6 +546,7 @@ private  void getCbDados()
                 return types [columnIndex];
             }
         });
+        tblClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);

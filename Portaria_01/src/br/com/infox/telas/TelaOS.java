@@ -328,6 +328,7 @@ private  void getCbDados()
 
         cbOsTrans.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOsTrans.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Outro meio de trans", "Carro", "Moto", "Bicicleta", " " }));
+        cbOsTrans.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbOsTrans.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOsTransActionPerformed(evt);
@@ -351,6 +352,7 @@ private  void getCbDados()
 
         cbOsSit.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Na planta", "Encerrada" }));
+        cbOsSit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbOsSit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbOsSitMouseClicked(evt);
@@ -426,6 +428,7 @@ private  void getCbDados()
                 return types [columnIndex];
             }
         });
+        tblClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);

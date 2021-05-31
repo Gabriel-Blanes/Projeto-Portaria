@@ -174,6 +174,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setTitle("Usuarios");
 
         cboUsuPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User", " " }));
+        cboUsuPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cboUsuPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboUsuPerfilActionPerformed(evt);

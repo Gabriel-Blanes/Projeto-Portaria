@@ -295,6 +295,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPessoasMouseClicked(evt);

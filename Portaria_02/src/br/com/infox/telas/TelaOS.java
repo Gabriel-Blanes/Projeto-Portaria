@@ -684,6 +684,7 @@ private  void getCbDados()
                 return types [columnIndex];
             }
         });
+        tblClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
@@ -774,6 +775,7 @@ private  void getCbDados()
 
         cbOsSit.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Na planta", "Encerrada" }));
+        cbOsSit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbOsSit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbOsSitMouseClicked(evt);
@@ -787,6 +789,7 @@ private  void getCbDados()
 
         cbOSAuto.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOSAuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Alessandro", "Conceição", "Eduardo", "Pamela", "Robson", "Marcelo", "Wilson", "Willy", " " }));
+        cbOSAuto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnCliIm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/print.png"))); // NOI18N
         btnCliIm.setToolTipText("Imprimir");
@@ -845,6 +848,7 @@ private  void getCbDados()
 
         cbOSPort.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOSPort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Edson", "Elizandro", "Nildo ", "Vaine" }));
+        cbOSPort.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnOSRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/read.png"))); // NOI18N
         btnOSRead.setToolTipText("Consultar");

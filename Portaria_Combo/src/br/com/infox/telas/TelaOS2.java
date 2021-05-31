@@ -1,4 +1,4 @@
-package br.com.infox.telas;
+    package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
@@ -303,10 +303,12 @@ private  void getCbDados()
         setTitle("Controle-de- Entrada-e-Saida-de-Chaves");
 
         cbOSAuto.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        cbOSAuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Alessandro", "Conceição", "Eduardo", "Pamela", "Robson", "Marcelo", "Wilson", "Willy", " " }));
+        cbOSAuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Alessandro", "Conceição", "Valter", "Pamela", "Robson", "Marcelo", "Wilson", "Willy", " " }));
+        cbOSAuto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         cbOSPort.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        cbOSPort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Edson", "Elizandro", "Nildo ", "Vaine" }));
+        cbOSPort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Edson", "Elisandro", "Nildo ", "Vaine" }));
+        cbOSPort.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setText("*Autorização");
@@ -354,6 +356,7 @@ private  void getCbDados()
                 return types [columnIndex];
             }
         });
+        tblClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
@@ -492,6 +495,7 @@ private  void getCbDados()
 
         cbOsSit.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Na planta", "Encerrada" }));
+        cbOsSit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbOsSit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbOsSitMouseClicked(evt);

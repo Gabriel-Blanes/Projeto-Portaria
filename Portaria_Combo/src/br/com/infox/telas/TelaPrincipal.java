@@ -79,9 +79,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/Logo MK - Novo.png"))); // NOI18N
 
         menCad.setText("Cadastro");
+        menCad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         menCadCli.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menCadCli.setText("Pessoas");
+        menCadCli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menCadCliActionPerformed(evt);
@@ -91,6 +93,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadOS.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
         menCadOS.setText("Entrada e Saida Pessoas");
+        menCadOS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menCadOSActionPerformed(evt);
@@ -100,6 +103,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadOS3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK));
         menCadOS3.setText("Pessoas Chaves");
+        menCadOS3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadOS3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menCadOS3ActionPerformed(evt);
@@ -109,6 +113,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadOS1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menCadOS1.setText("Entrada e Saida Chaves");
+        menCadOS1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadOS1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menCadOS1ActionPerformed(evt);
@@ -118,6 +123,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadOS4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.ALT_MASK));
         menCadOS4.setText("Pessoas Frota");
+        menCadOS4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadOS4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menCadOS4ActionPerformed(evt);
@@ -127,6 +133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadOS2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
         menCadOS2.setText("Entrada e Saida Frota");
+        menCadOS2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadOS2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menCadOS2ActionPerformed(evt);
@@ -136,6 +143,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadUsu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menCadUsu.setText("Usuários");
+        menCadUsu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadUsu.setEnabled(false);
         menCadUsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +155,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Menu.add(menCad);
 
         menAju.setText("Ajuda");
+        menAju.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menAju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menAjuActionPerformed(evt);
@@ -155,6 +164,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menAjuSob.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
         menAjuSob.setText("Sobre");
+        menAjuSob.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menAjuSob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menAjuSobActionPerformed(evt);
@@ -165,6 +175,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Menu.add(menAju);
 
         MenReles.setText("Relatório");
+        MenReles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenReles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenRelesActionPerformed(evt);
@@ -173,6 +184,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenRelES.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         MenRelES.setText("Entrada e Saida Pessoas");
+        MenRelES.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenRelES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenRelESActionPerformed(evt);
@@ -182,6 +194,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenRelES1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         MenRelES1.setText("Entrada e Saida Chaves");
+        MenRelES1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenRelES1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenRelES1ActionPerformed(evt);
@@ -191,6 +204,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenRelES2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
         MenRelES2.setText("Entrada e Saida Frota");
+        MenRelES2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenRelES2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenRelES2ActionPerformed(evt);
@@ -201,9 +215,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Menu.add(MenReles);
 
         menOp.setText("Opções");
+        menOp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         menOpSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         menOpSair.setText("Sair");
+        menOpSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menOpSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menOpSairActionPerformed(evt);

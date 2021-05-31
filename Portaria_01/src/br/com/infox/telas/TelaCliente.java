@@ -308,6 +308,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jLabel2.setText("*Nome");
 
         cbPsMot.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ajudante", "Colaborador", "Cliente", "Entrevista", "Prestador de Serviço", "Visitante" }));
+        cbPsMot.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbPsMot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPsMotActionPerformed(evt);
@@ -357,6 +358,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPessoasMouseClicked(evt);
