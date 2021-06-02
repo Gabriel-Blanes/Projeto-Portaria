@@ -8,8 +8,8 @@
 ES.en_id,
 ES.en_data_en,en_data_sai,en_chave,en_auto,en_porteiro,
 PES.pc_nome
-from  entrada_saida as ES
-inner join pessoas_cadastro as PES
+from  entrada_saida2 as ES
+inner join pessoas_cadastro2 as PES
 on(PES.pc_id = ES.pc_id)
 order by en_id;]]>
 	</queryString>
@@ -69,7 +69,7 @@ order by en_id;]]>
 				<text><![CDATA[ID E/S]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="81" y="0" width="100" height="20" uuid="fa9cb4d5-5398-4d02-b80d-8084af90986f"/>
+				<reportElement x="52" y="0" width="100" height="20" uuid="fa9cb4d5-5398-4d02-b80d-8084af90986f"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -119,7 +119,7 @@ order by en_id;]]>
 				<textFieldExpression><![CDATA[$F{en_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="81" y="0" width="100" height="20" uuid="6fd18127-d699-46b7-b3d2-67d133808e68"/>
+				<reportElement x="52" y="0" width="100" height="20" uuid="6fd18127-d699-46b7-b3d2-67d133808e68"/>
 				<textFieldExpression><![CDATA[$F{pc_nome}]]></textFieldExpression>
 			</textField>
 			<textField>

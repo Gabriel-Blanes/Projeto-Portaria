@@ -7,9 +7,10 @@
 		<![CDATA[select
 ES.en_id,
 ES.en_data_en,en_data_sai,en_placa_modelo,en_km_en,en_km_sai,en_km_ro,
+ES.en_dest,
 PES.pc_nome
-from  entrada_saida as ES
-inner join pessoas_cadastro as PES
+from  entrada_saida3 as ES
+inner join pessoas_cadastro3 as PES
 on(PES.pc_id = ES.pc_id)
 order by en_id]]>
 	</queryString>
@@ -32,6 +33,9 @@ order by en_id]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="en_km_ro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_dest" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="pc_nome" class="java.lang.String">
@@ -72,21 +76,21 @@ order by en_id]]>
 				<text><![CDATA[ID E/S]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="78" y="0" width="100" height="20" uuid="5dad6ce1-2dff-426b-9f51-6d0c6b2c1dae"/>
+				<reportElement x="51" y="0" width="100" height="20" uuid="5dad6ce1-2dff-426b-9f51-6d0c6b2c1dae"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="676" y="0" width="100" height="20" uuid="800d02c5-31e0-492c-aea8-7451a1b7430a"/>
+				<reportElement x="697" y="0" width="100" height="20" uuid="800d02c5-31e0-492c-aea8-7451a1b7430a"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dada de entrada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="558" y="0" width="100" height="20" uuid="1b9993a0-480d-4068-baf2-9b9be477ae09"/>
+				<reportElement x="597" y="0" width="100" height="20" uuid="1b9993a0-480d-4068-baf2-9b9be477ae09"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -100,25 +104,32 @@ order by en_id]]>
 				<text><![CDATA[Placa e modelo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="261" y="0" width="100" height="20" uuid="dde63cc3-27c7-4119-8f56-5f77ea503110"/>
+				<reportElement x="443" y="0" width="100" height="20" uuid="dde63cc3-27c7-4119-8f56-5f77ea503110"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Km de entrada]]></text>
+				<text><![CDATA[Km entrada]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="358" y="0" width="100" height="20" uuid="dc252c78-d8e7-4a0b-80dc-af0cf66a3f85"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Km de saida]]></text>
+				<text><![CDATA[Km  saida]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="445" y="0" width="100" height="20" uuid="e83db8a0-fd54-4218-9951-72faa45b7b97"/>
+				<reportElement x="525" y="0" width="100" height="20" uuid="e83db8a0-fd54-4218-9951-72faa45b7b97"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Km rodado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="0" width="100" height="20" uuid="c2cc2407-7eab-433e-90f6-dbf8aecb0045"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Destino]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -129,23 +140,23 @@ order by en_id]]>
 				<textFieldExpression><![CDATA[$F{en_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="78" y="0" width="100" height="20" uuid="59f0ab80-000e-4b49-87fa-ea0728c09306"/>
+				<reportElement x="51" y="0" width="88" height="20" uuid="59f0ab80-000e-4b49-87fa-ea0728c09306"/>
 				<textFieldExpression><![CDATA[$F{pc_nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="676" y="0" width="100" height="20" uuid="9872a794-16b1-44c3-a74d-692e5d68fe51"/>
+				<reportElement x="697" y="0" width="100" height="20" uuid="9872a794-16b1-44c3-a74d-692e5d68fe51"/>
 				<textFieldExpression><![CDATA[$F{en_data_en}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="558" y="0" width="100" height="20" uuid="0e3bbd7b-197c-405c-a3db-db1ce5e51406"/>
+				<reportElement x="597" y="0" width="100" height="20" uuid="0e3bbd7b-197c-405c-a3db-db1ce5e51406"/>
 				<textFieldExpression><![CDATA[$F{en_data_sai}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="151" y="0" width="127" height="20" uuid="6d002084-3ee3-4340-bab8-b6b394fc0562"/>
+				<reportElement x="152" y="0" width="106" height="20" uuid="6d002084-3ee3-4340-bab8-b6b394fc0562"/>
 				<textFieldExpression><![CDATA[$F{en_placa_modelo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="261" y="0" width="100" height="20" uuid="712c1c69-4152-4bea-9b3b-18aef4f99ddb"/>
+				<reportElement x="443" y="0" width="100" height="20" uuid="712c1c69-4152-4bea-9b3b-18aef4f99ddb"/>
 				<textFieldExpression><![CDATA[$F{en_km_en}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -153,8 +164,12 @@ order by en_id]]>
 				<textFieldExpression><![CDATA[$F{en_km_sai}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="445" y="0" width="100" height="20" uuid="32382026-f407-4f69-8f42-aeb5a4d28420"/>
+				<reportElement x="525" y="0" width="100" height="20" uuid="32382026-f407-4f69-8f42-aeb5a4d28420"/>
 				<textFieldExpression><![CDATA[$F{en_km_ro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="0" width="100" height="20" uuid="7edc6857-9deb-464f-b345-deba6164a802"/>
+				<textFieldExpression><![CDATA[$F{en_dest}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

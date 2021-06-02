@@ -7,7 +7,8 @@
 		<![CDATA[select
 ES.en_id,
 ES.en_data_en,en_data_sai,en_meio_transporte,
-PES.pc_nome,pc_empresa
+PES.pc_nome,pc_empresa,
+PES.pc_motivo
 from  entrada_saida as ES
 inner join pessoas_cadastro as PES
 on(PES.pc_id = ES.pc_id)
@@ -29,6 +30,9 @@ order by en_id;]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="pc_empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pc_motivo" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -59,21 +63,21 @@ order by en_id;]]>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="43" y="0" width="100" height="20" uuid="c3ae4cac-322b-4f7e-acd5-8856699948c8"/>
+				<reportElement x="55" y="0" width="100" height="20" uuid="c3ae4cac-322b-4f7e-acd5-8856699948c8"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="206" y="0" width="92" height="20" uuid="0a418119-831d-4962-a94f-4a6638ae336e"/>
+				<reportElement x="198" y="0" width="92" height="20" uuid="0a418119-831d-4962-a94f-4a6638ae336e"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Meio de Trans]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="336" y="0" width="100" height="20" uuid="609226c9-d05d-45e9-b8d6-15dfc309d605"/>
+				<reportElement x="326" y="0" width="100" height="20" uuid="609226c9-d05d-45e9-b8d6-15dfc309d605"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -87,7 +91,7 @@ order by en_id;]]>
 				<text><![CDATA[Data de Entrada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="574" y="0" width="100" height="20" uuid="1ef213de-8e32-42d7-bfaa-53b8100c5323"/>
+				<reportElement x="582" y="0" width="100" height="20" uuid="1ef213de-8e32-42d7-bfaa-53b8100c5323"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -105,15 +109,15 @@ order by en_id;]]>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="43" y="0" width="136" height="20" uuid="a32208eb-4ed6-4d84-b0cc-52846880d010"/>
+				<reportElement x="55" y="0" width="136" height="20" uuid="a32208eb-4ed6-4d84-b0cc-52846880d010"/>
 				<textFieldExpression><![CDATA[$F{pc_nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="206" y="0" width="114" height="20" uuid="4a9c46b1-d9c1-4779-8084-ef934ffa1ff9"/>
+				<reportElement x="198" y="0" width="114" height="20" uuid="4a9c46b1-d9c1-4779-8084-ef934ffa1ff9"/>
 				<textFieldExpression><![CDATA[$F{en_meio_transporte}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="336" y="0" width="100" height="20" uuid="01dc9044-692e-4f0b-b1d5-59f05bdec83a"/>
+				<reportElement x="326" y="0" width="100" height="20" uuid="01dc9044-692e-4f0b-b1d5-59f05bdec83a"/>
 				<textFieldExpression><![CDATA[$F{pc_empresa}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -121,7 +125,7 @@ order by en_id;]]>
 				<textFieldExpression><![CDATA[$F{en_data_en}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="574" y="0" width="100" height="20" uuid="13f5acb9-07c1-4e80-a3c3-564b8639c43d"/>
+				<reportElement x="582" y="0" width="100" height="20" uuid="13f5acb9-07c1-4e80-a3c3-564b8639c43d"/>
 				<textFieldExpression><![CDATA[$F{en_data_sai}]]></textFieldExpression>
 			</textField>
 			<textField>

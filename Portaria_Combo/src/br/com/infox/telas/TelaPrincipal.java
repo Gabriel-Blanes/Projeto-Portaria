@@ -3,6 +3,7 @@ package br.com.infox.telas;
 
 import br.com.infox.dal.ModuloConexao;
 import java.sql.*;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;

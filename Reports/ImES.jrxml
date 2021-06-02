@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ImES" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4146fe17-d931-4ff9-95bb-5adfa514fe2a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="en_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from entrada_saida where en_id = $P{en_id}]]>
+	</queryString>
+	<field name="en_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_situacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_meio_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_data_en" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="en_data_sai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pc_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="172" height="79" uuid="7abd1ef6-1059-4346-a269-efca858077c8"/>
+				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="26" width="100" height="20" uuid="131e5aba-c321-4c6f-9996-5cfd0b39dec0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="172" y="0" width="84" height="36" uuid="ecf9c9b1-7784-435b-aef3-5298aa414878"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID E/S]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="172" y="36" width="126" height="32" uuid="4293b02c-e8ff-4dde-8ce3-141452d24b8b"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{en_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="b89da6d7-3d5e-43fe-8793-e0eb7f6c69d3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="100" height="20" uuid="27d85409-9207-40bf-be76-61e8a6f6587b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Meio de transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="0" width="100" height="20" uuid="dc72ff74-27c8-453e-aca0-8273e9d5343c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="0" width="100" height="20" uuid="b3c73511-1210-4270-a862-3a564910cb9c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Saida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="487" y="0" width="68" height="20" uuid="5c974422-4bce-4ed2-8827-018a323ae71e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Pessoas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="41ad958f-918e-4675-9069-fcedc1ee487a"/>
+				<textFieldExpression><![CDATA[$F{en_situacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="122" height="20" uuid="3fe425dc-d0a7-440f-85d6-16345d855bb8"/>
+				<textFieldExpression><![CDATA[$F{en_meio_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="0" width="100" height="20" uuid="59656f71-8faf-4052-b55d-bfa9f3e92f42"/>
+				<textFieldExpression><![CDATA[$F{en_data_en}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="0" width="100" height="20" uuid="2e311cd6-16e5-44db-90eb-4ed2af8c2766"/>
+				<textFieldExpression><![CDATA[$F{en_data_sai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="0" width="55" height="20" uuid="129adc34-3da2-4694-9e93-cacd6127794b"/>
+				<textFieldExpression><![CDATA[$F{pc_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
