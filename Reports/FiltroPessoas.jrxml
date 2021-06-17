@@ -35,20 +35,34 @@ order by pc_nome;]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="256" y="20" width="137" height="20" uuid="7adaa3e8-101a-418d-8bdd-06f5f1ec23be"/>
+				<reportElement x="383" y="59" width="137" height="20" uuid="7adaa3e8-101a-418d-8bdd-06f5f1ec23be"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="10" y="0" width="214" height="79" uuid="45ff0f6f-4fde-4441-bbc0-1ff71dd1cb08"/>
+				<reportElement x="0" y="0" width="167" height="79" uuid="a597cb75-2c9d-4210-afa1-bf1f4e43bc89"/>
 				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="177" y="30" width="53" height="41" uuid="ae77c8d4-5b7a-41ee-9e44-95c922c9a7d5"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Filtro Pessoas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="11" width="338" height="35" uuid="97f007dc-24b2-45f1-bc5c-b9ee5e940be6"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Entrada e Saida de Pessoas]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="25" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="20" uuid="2b7927ea-5bb4-4864-9d51-4ac71dbb4419"/>
 				<textElement>
@@ -100,7 +114,7 @@ order by pc_nome;]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">

@@ -69,7 +69,6 @@ public class TelaLogin extends javax.swing.JFrame {
 
     public TelaLogin() {
         initComponents();
-        this.icone2.setVisible(false);
         conecxao = ModuloConexao.conector();
         // a linha abaixo mostra o status de conexão        
         //System.out.println(conecxao);
@@ -90,8 +89,8 @@ public class TelaLogin extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
-        icone2 = new javax.swing.JLabel();
         icone1 = new javax.swing.JLabel();
+        icone2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -119,19 +118,19 @@ public class TelaLogin extends javax.swing.JFrame {
 
         lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/dberror.png"))); // NOI18N
 
-        icone2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/eyeClosed.png"))); // NOI18N
-        icone2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        icone2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                icone2MousePressed(evt);
-            }
-        });
-
         icone1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/eyeOpen.png"))); // NOI18N
         icone1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         icone1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 icone1MousePressed(evt);
+            }
+        });
+
+        icone2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/eyeClosed.png"))); // NOI18N
+        icone2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        icone2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                icone2MousePressed(evt);
             }
         });
 
@@ -150,15 +149,15 @@ public class TelaLogin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUsuario)
                             .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(icone2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(icone1))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(icone2)
+                            .addComponent(icone1)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblStatus)
-                        .addGap(77, 77, 77)
+                        .addGap(78, 78, 78)
                         .addComponent(btnLogin)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(0, 48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,18 +166,19 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(icone2)
-                    .addComponent(icone1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(icone2)
+                        .addComponent(icone1)))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(lblStatus))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,19 +195,19 @@ public class TelaLogin extends javax.swing.JFrame {
         logar();
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void icone2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icone2MousePressed
-        // TODO add your handling code here:
-        icone1.setVisible(true);
-        icone2.setVisible(false);
-        txtSenha.setEchoChar((char)0);
-    }//GEN-LAST:event_icone2MousePressed
-
     private void icone1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icone1MousePressed
         // TODO add your handling code here:
         icone2.setVisible(true);
         icone1.setVisible(false);
         txtSenha.setEchoChar(('*'));
     }//GEN-LAST:event_icone1MousePressed
+
+    private void icone2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icone2MousePressed
+        // TODO add your handling code here:
+        icone1.setVisible(true);
+        icone2.setVisible(false);
+        txtSenha.setEchoChar((char)0);
+    }//GEN-LAST:event_icone2MousePressed
 
     /**
      * @param args the command line arguments

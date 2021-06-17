@@ -39,21 +39,21 @@ order by en_id;]]>
 	</background>
 	<title>
 		<band height="106" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="236" height="106" uuid="e00ad58f-2638-46b8-b615-d474ed43f942"/>
-				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="260" y="37" width="184" height="35" uuid="ec933221-481a-409f-a298-31197253b184"/>
+				<reportElement x="260" y="37" width="321" height="35" uuid="ec933221-481a-409f-a298-31197253b184"/>
 				<textElement>
 					<font size="22" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ Entrada e Saida]]></text>
+				<text><![CDATA[ Entrada e Saida de Chaves]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="459" y="0" width="100" height="20" uuid="9c2af99d-2a7f-4c13-b91e-c658fb853e45"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="10" y="0" width="172" height="106" uuid="d5aeffb5-1a38-4941-9858-ef1461ba0fdf"/>
+				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -69,7 +69,7 @@ order by en_id;]]>
 				<text><![CDATA[ID E/S]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="52" y="0" width="100" height="20" uuid="fa9cb4d5-5398-4d02-b80d-8084af90986f"/>
+				<reportElement x="56" y="0" width="100" height="20" uuid="fa9cb4d5-5398-4d02-b80d-8084af90986f"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -77,7 +77,7 @@ order by en_id;]]>
 			</staticText>
 			<staticText>
 				<reportElement x="181" y="0" width="100" height="20" uuid="91a063e3-c22f-4e63-a6c6-739abdcf500a"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Chave]]></text>
@@ -119,11 +119,12 @@ order by en_id;]]>
 				<textFieldExpression><![CDATA[$F{en_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="52" y="0" width="100" height="20" uuid="6fd18127-d699-46b7-b3d2-67d133808e68"/>
+				<reportElement x="56" y="0" width="100" height="20" uuid="6fd18127-d699-46b7-b3d2-67d133808e68"/>
 				<textFieldExpression><![CDATA[$F{pc_nome}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="181" y="0" width="100" height="20" uuid="7a5a22a4-8902-4290-93a5-a700b17ccaea"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{en_chave}]]></textFieldExpression>
 			</textField>
 			<textField>

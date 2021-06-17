@@ -45,6 +45,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menAjuSob = new javax.swing.JMenuItem();
         MenReles = new javax.swing.JMenu();
         MenRelES = new javax.swing.JMenuItem();
+        MenRelES1 = new javax.swing.JMenuItem();
         menOp = new javax.swing.JMenu();
         menOpSair = new javax.swing.JMenuItem();
 
@@ -145,6 +146,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         MenReles.add(MenRelES);
+
+        MenRelES1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
+        MenRelES1.setText("Filtro Frota");
+        MenRelES1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MenRelES1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenRelES1ActionPerformed(evt);
+            }
+        });
+        MenReles.add(MenRelES1);
 
         Menu.add(MenReles);
 
@@ -276,6 +287,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menOpSairActionPerformed
 
+    private void MenRelES1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenRelES1ActionPerformed
+        // TODO add your handling code here:
+         TelaFiltro filtro = new TelaFiltro();
+        filtro.setVisible(true);
+    }//GEN-LAST:event_MenRelES1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,6 +331,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuItem MenRelES;
+    private javax.swing.JMenuItem MenRelES1;
     private javax.swing.JMenu MenReles;
     private javax.swing.JMenuBar Menu;
     private javax.swing.JLabel jLabel1;

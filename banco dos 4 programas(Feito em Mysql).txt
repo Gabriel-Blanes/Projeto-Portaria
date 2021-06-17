@@ -235,6 +235,8 @@ pc_nasci varchar(20),
 primary key(pc_id)
 );
 
+
+
 create table entrada_saida(
 en_id int not null auto_increment,
 en_situacao varchar(20),
@@ -245,6 +247,7 @@ primary key(en_id),
 pc_id int,
 constraint fk_pc_id foreign key (pc_id) references pessoas_cadastro(pc_id)
 );
+
 
 ALTER TABLE pessoas_cadastro
 MODIFY COLUMN pc_nome varchar(50) not null;
@@ -258,14 +261,6 @@ insert into  usuarios(user_id,user_usuario,user_login,user_senha,user_perfil )VA
 (1,'Pamela Padovani ','admin','portariamklog','Admin'),
 (2,'Gabriel Blanes ','Gabriel.B','Ga16Bla10','Admin');
 
-select
-ES.en_id,
-ES.en_data_en,en_data_sai,en_meio_transporte,
-PES.pc_nome,pc_empresa
-from  entrada_saida as ES
-inner join pessoas_cadastro as PES
-on(PES.pc_id = ES.pc_id)
-order by en_id;
 
 
 
@@ -273,6 +268,8 @@ order by en_id;
 
 
 
+
+		
 create table entrada_saida2(
 en_id int not null auto_increment,
 en_chave varchar(20),
@@ -293,8 +290,8 @@ constraint fk_pc_id2 foreign key (pc_id) references pessoas_cadastro2(pc_id)
 
 select
 ES.en_id,
-ES.en_data_en,en_data_sai,en_meio_transporte,
-PES.pc_nome,pc_empresa
+ES.en_data_en,en_data_sai,en_chave,en_auto,en_porteiro,
+PES.pc_nome
 from  entrada_saida2 as ES
 inner join pessoas_cadastro2 as PES
 on(PES.pc_id = ES.pc_id)
@@ -335,20 +332,92 @@ on(PES.pc_id = ES.pc_id)
 order by en_id;
 
 
+
+
+select
+ES.en_id,
+ES.en_data_en,en_data_sai,
+PES.pc_nome
+from  entrada_saida as ES
+inner join pessoas_cadastro as PES
+on(PES.pc_id = ES.pc_id)
+where pc_nome ='Gabriel Blanes '
+order by en_id;
+
+
  
+select
+ES.en_id,
+ES.en_data_en,en_data_sai,
+PES.pc_nome
+from  entrada_saida as ES
+inner join pessoas_cadastro as PES
+on(PES.pc_id = ES.pc_id)
+where pc_nome ='Wilson Antonio Vieira da Silva' and (ES.en_data_en like '%-06-%' or ES.en_data_sai like '%-06-%') 
+order by en_id;
+
+
+
+select
+ES.en_id,
+ES.en_data_en,en_data_sai,en_chave,en_auto,en_porteiro,
+PES.pc_nome
+from  entrada_saida2 as ES
+inner join pessoas_cadastro2 as PES
+on(PES.pc_id = ES.pc_id)
+where pc_nome ='Gabriel Blanes ' 
+order by en_id;
+
+select
+ES.en_id,
+ES.en_data_en,en_data_sai,en_chave,en_auto,en_porteiro,
+PES.pc_nome
+from  entrada_saida2 as ES
+inner join pessoas_cadastro2 as PES
+on(PES.pc_id = ES.pc_id)
+where pc_nome ='Victor Hugo Correia de Jesus'  and en_chave ='193-1'
+order by en_id;
+
+select
+ES.en_id,
+ES.en_data_en,en_data_sai,en_chave,en_auto,en_porteiro,
+PES.pc_nome
+from  entrada_saida2 as ES
+inner join pessoas_cadastro2 as PES
+on(PES.pc_id = ES.pc_id)
+where  en_chave ='1'
+order by en_id;
 
 
 
 
 
+select
+ES.en_id,
+ES.en_data_en,en_data_sai,en_placa_modelo,en_km_en,en_km_sai,en_km_ro,en_dest,
+PES.pc_nome
+from  entrada_saida3 as ES
+inner join pessoas_cadastro3 as PES
+on(PES.pc_id = ES.pc_id)
+where pc_nome ='Gabriel Blanes ' 
+order by en_id;
 
- 
+select
+ES.en_id,
+ES.en_data_en,en_data_sai,en_placa_modelo,en_km_en,en_km_sai,en_km_ro,en_dest,
+PES.pc_nome
+from  entrada_saida3 as ES
+inner join pessoas_cadastro3 as PES
+on(PES.pc_id = ES.pc_id)
+where pc_nome ='Gabriel Blanes '  and en_placa_modelo = '' 
+order by en_id;
 
-
-
-
-
-
-
-
-
+select
+ES.en_id,
+ES.en_data_en,en_data_sai,en_placa_modelo,en_km_en,en_km_sai,en_km_ro,en_dest,
+PES.pc_nome
+from  entrada_saida3 as ES
+inner join pessoas_cadastro3 as PES
+on(PES.pc_id = ES.pc_id)
+where  en_placa_modelo = '123' 
+order by en_id;
