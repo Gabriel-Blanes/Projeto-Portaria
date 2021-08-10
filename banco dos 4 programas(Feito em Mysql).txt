@@ -47,7 +47,7 @@ MODIFY COLUMN pc_cpf varchar(20);
 
 insert into  usuarios(user_id,user_usuario,user_login,user_senha,user_perfil )VALUES 
 (1,'Pamela Padovani ','admin','portariamklog','Admin'),
-(2,'Gabriel Blanes ','Gabriel.B','Ga16Bla10','Admin');
+(2,'Gabriel Blanes ','Gabriel.B','123,'Admin');
 
 select
 ES.en_id,
@@ -113,7 +113,7 @@ MODIFY COLUMN pc_cpf varchar(20);
 
 insert into  usuarios(user_id,user_usuario,user_login,user_senha,user_perfil )VALUES 
 (1,'Pamela Padovani ','admin','portariamklog','Admin'),
-(2,'Gabriel Blanes ','Gabriel.B','Ga16Bla10','Admin');
+(2,'Gabriel Blanes ','Gabriel.B','123,'Admin');
 
 select
 ES.en_id,
@@ -175,7 +175,7 @@ constraint fk_pc_id3 foreign key (pc_id) references pessoas_cadastro3(pc_id)
 
 insert into  usuarios(user_id,user_usuario,user_login,user_senha,user_perfil )VALUES 
 (1,'Pamela Padovani ','admin','portariamklog','Admin'),
-(2,'Gabriel Blanes ','Gabriel.B','Ga16Bla10','Admin');
+((2,'Gabriel Blanes ','Gabriel.B','123,'Admin');
 
 
 select
@@ -259,7 +259,7 @@ MODIFY COLUMN pc_cpf varchar(20);
 
 insert into  usuarios(user_id,user_usuario,user_login,user_senha,user_perfil )VALUES 
 (1,'Pamela Padovani ','admin','portariamklog','Admin'),
-(2,'Gabriel Blanes ','Gabriel.B','Ga16Bla10','Admin');
+(2,'Gabriel Blanes ','Gabriel.B','123,'Admin');
 
 
 
