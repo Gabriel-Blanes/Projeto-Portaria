@@ -2,7 +2,6 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
-import java.awt.HeadlessException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -36,8 +35,8 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
 
             tblPessoas.setModel(DbUtils.resultSetToTableModel(rs));
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException e) {
+          JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -81,6 +80,7 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Tela-Filtro-Chaves");
 
         btnFiltroIm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/print.png"))); // NOI18N
         btnFiltroIm.setToolTipText("Imprimir");
@@ -251,6 +251,11 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
             }
         });
 
+        tblPessoas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblPessoas.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblPessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -278,6 +283,8 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
             }
         });
         tblPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblPessoas.setFocusable(false);
+        tblPessoas.getTableHeader().setReorderingAllowed(false);
         tblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPessoasMouseClicked(evt);
@@ -362,7 +369,8 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFiltroImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroImActionPerformed
-
+    
+        
         if(RadioMesAll.isSelected()){
 
             int confirma = JOptionPane.showConfirmDialog(null,"Confirma a emissão deste relatório?","ATENÇÃO!!",JOptionPane.YES_NO_OPTION);
@@ -372,11 +380,11 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
                     HashMap Filtro = new  HashMap();
                     Filtro.put("nome",(txtPsNome.getText()));
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas4.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroPessoas4.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+               JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
@@ -393,11 +401,11 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
                     Filtro.put("ES",(TxtMes.getText()));
 
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas2.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroPessoas2.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                    JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
@@ -418,7 +426,7 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                    JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
@@ -435,11 +443,11 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
                     Filtro.put("chave",(txtOSCh.getText()));
 
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroChaves1.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroChaves1.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                     JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
@@ -455,15 +463,18 @@ public class TelaFiltro2 extends javax.swing.JInternalFrame {
                     Filtro.put("chave",(txtOSCh.getText()));
 
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroChaves2.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroChaves2.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                    JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
         }
+       else{
+                 JOptionPane.showMessageDialog(null,"Não foi selecionado algum campo das opções do campo Filtro.Por favor,selecione e preencha os campos que apareceu das demais opções, apos selecionar uma opção do campo Filtro!!");
+            }
 
     }//GEN-LAST:event_btnFiltroImActionPerformed
 

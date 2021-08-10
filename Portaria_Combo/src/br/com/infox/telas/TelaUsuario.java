@@ -39,7 +39,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
 
         }
     }
@@ -79,7 +79,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -112,7 +112,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -140,7 +140,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             } 
             catch (HeadlessException | SQLException e) 
             {
-                JOptionPane.showMessageDialog(null, e);
+               JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
 
         }

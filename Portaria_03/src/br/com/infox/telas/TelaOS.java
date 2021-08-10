@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -20,7 +21,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    private String tipo;
+  
 
     public TelaOS() {
         initComponents();
@@ -42,7 +43,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
             tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -84,20 +85,12 @@ public class TelaOS extends javax.swing.JInternalFrame {
               if (adicionado > 0) {
                   JOptionPane.showMessageDialog(null, "Entrada e Saida da frota adicionada com sucesso!");
                   
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-                  
-                   txtCliid.setText(null);
+                 limpar();
               }
           }
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -135,7 +128,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
             //System.out.println(e);
 
         } catch (HeadlessException | SQLException m) {
-            JOptionPane.showMessageDialog(null, m);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +m);
         }
     }
 
@@ -168,17 +161,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Dados de Entrada e Saida da frota alteradas com sucesso!");
                       
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-             
-              
-             
-                    txtCliid.setText(null);
+                   limpar();
 
                     btnOSCreate.setEnabled(true);
                     txtCliPesquisar.setEnabled(true);
@@ -187,7 +170,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
             }
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -205,15 +188,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Dados de Entrada e Saida da frota Removidas com sucesso!");
                 }
                 
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-             
-                    txtCliid.setText(null);
+               limpar();
                     
                 btnOSCreate.setEnabled(true);
                 txtCliPesquisar.setEnabled(true);
@@ -221,7 +196,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
             } catch (HeadlessException | SQLException e) {
 
-                JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
 
         }
@@ -243,7 +218,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 //a linha abaixo exibe o relatório através da classe JasperViewer
              JasperViewer.viewReport(print,false);                  
             } catch (NumberFormatException | JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+                 JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
      
@@ -255,7 +230,7 @@ private  void km()
         
                String placa = cbOSPl.getSelectedItem().toString(); //aqui estou pegando a variavel do combobox
 
-      String sql = "select max(en_km_en), max(en_km_sai) "
+      String sql = "select max(en_km_sai), max(en_km_en) "
                     +"from entrada_saida " 
                     +"where en_placa_modelo = ?;"; //select para executar as funções max
 
@@ -266,22 +241,31 @@ private  void km()
         {
             //caso de certo, true, pega o resultado, que é o resultSet do banco e seta nos campos os valores
             //da query 
-            txtOSKmE.setText(rs.getString(1)); 
-            txtOSKmS.setText(rs.getString(2));
+             txtOSKmS.setText(rs.getString(1));
+            txtOSKmE.setText(rs.getString(2)); 
+          
 
         }
         
         
-    } catch (Exception e) {
+    } catch (SQLException e) {
+         JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
     }
 
 } 
   private void calculaKm()
   {
+      try{
       Double kmEntrada =  Double.parseDouble(txtOSKmE.getText());
       Double kmSaida = Double.parseDouble(txtOSKmS.getText());
       Double kmResultado = kmEntrada - kmSaida;
       txtOSKmR.setText(kmResultado.toString());
+           
+      } catch (NumberFormatException e) {
+        
+       JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+    }
+
   }
         
 private  void getCbDados()
@@ -318,12 +302,29 @@ private  void getCbDados()
     }
   catch(Exception e)
     {
-    
+  JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
     }
        
        
     }
 
+private void limpar(){
+    
+                    txtCliPesquisar.setText(null);
+                     txtOsEs.setText(null);
+                     txtOSDest.setText(null);
+                     txtOSKmE.setText(null);
+                     txtOSKmS.setText(null);
+                     txtOSKmR.setText(null);
+                     txtOSEn.setText(null);
+                     txtOSSai.setText(null);
+             
+                    txtCliid.setText(null);
+                     cbOSPl.setSelectedItem(null);
+                    cbOsSit.setSelectedItem(null);
+                    
+                    ((DefaultTableModel)tblClientes.getModel()).setRowCount(0);
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -728,6 +729,11 @@ private  void getCbDados()
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/pesquisar.png"))); // NOI18N
 
+        tblClientes = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblClientes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -755,6 +761,8 @@ private  void getCbDados()
             }
         });
         tblClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblClientes.setFocusable(false);
+        tblClientes.getTableHeader().setReorderingAllowed(false);
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
@@ -887,7 +895,7 @@ private  void getCbDados()
         });
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setText("*placa");
+        jLabel8.setText("*Placa");
 
         jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel20.setText("Km Rodado");

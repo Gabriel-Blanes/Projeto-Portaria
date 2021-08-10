@@ -5,6 +5,7 @@ import br.com.infox.dal.ModuloConexao;
 import java.awt.HeadlessException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -35,8 +36,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
             tblPessoas.setModel(DbUtils.resultSetToTableModel(rs));
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException e) {
+           JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -91,20 +92,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "Pessoa adicionada com sucesso!");
                         pst.setString(1, txtPsNome.getText());
 
-                        txtPsNome.setText(null);
-                     
-                     
-                        txtPsRG.setText(null);
-                        txtPsCPF.setText(null);
-                        txtPsDat.setText(null);
-                     
-                        txtPsId.setText(null);
+                       limpar();
                     }
                 }
 
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -134,19 +128,14 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Dados da Pessoa alterada com sucesso!");
                 pst.setString(1, txtPsNome.getText());
 
-                     txtPsNome.setText(null);
-                  
-                    
-                        txtPsRG.setText(null);
-                        txtPsCPF.setText(null);
-                        txtPsDat.setText(null);
+                    limpar();
                      
 
                 btnCliCreate.setEnabled(true);
 
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -163,22 +152,27 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 if (apagado > 0) {
                     JOptionPane.showMessageDialog(null, "Dados da Pessoa removido com sucesso!");
 
-                 txtPsNome.setText(null);
-                     
-                     
+                limpar();
+
+                }
+            } catch (HeadlessException | SQLException e) {
+                 JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+            }
+        }
+
+    }
+    
+        private void limpar(){
+                        txtPsPesquisar.setText(null); 
+                       txtPsNome.setText(null);
                         txtPsRG.setText(null);
                         txtPsCPF.setText(null);
                         txtPsDat.setText(null);
                      
                         txtPsId.setText(null);
-
-                }
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        }
-
-    }
+                   
+                    ((DefaultTableModel)tblPessoas.getModel()).setRowCount(0);
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -281,6 +275,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/pesquisar.png"))); // NOI18N
 
+        tblPessoas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblPessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -303,6 +302,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             }
         });
         tblPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblPessoas.setFocusable(false);
+        tblPessoas.getTableHeader().setReorderingAllowed(false);
         tblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPessoasMouseClicked(evt);
@@ -471,7 +472,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 //a linha abaixo exibe o relatório através da classe JasperViewer
                 JasperViewer.viewReport(print,false);
             } catch (JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+                 JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
     }//GEN-LAST:event_btnCliImActionPerformed

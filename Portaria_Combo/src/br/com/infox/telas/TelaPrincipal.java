@@ -350,11 +350,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             //imprimindo relatório com o framework JasperReports
             try {
                 //Usando a classe JasperPrint para preparar a impressão de um relatório
-                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/EntradaSaida2.jasper",null,conecxao);
+                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/EntradaSaida2.jasper",null,conecxao);
                 //a linha abaixo exibe o relatório através da classe JasperViewer
                 JasperViewer.viewReport(print,false);
             } catch (JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+                 JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
     }//GEN-LAST:event_MenRelESActionPerformed
@@ -397,11 +397,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             //imprimindo relatório com o framework JasperReports
             try {
                 //Usando a classe JasperPrint para preparar a impressão de um relatório
-                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/EntradaSaida3.jasper",null,conecxao);
+                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/EntradaSaida3.jasper",null,conecxao);
                 //a linha abaixo exibe o relatório através da classe JasperViewer
                 JasperViewer.viewReport(print,false);
             } catch (JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+               JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
     }//GEN-LAST:event_MenRelES1ActionPerformed
@@ -413,11 +413,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             //imprimindo relatório com o framework JasperReports
             try {
                 //Usando a classe JasperPrint para preparar a impressão de um relatório
-                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/EntradaSaida4.jasper",null,conecxao);
+                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/EntradaSaida4.jasper",null,conecxao);
                 //a linha abaixo exibe o relatório através da classe JasperViewer
                 JasperViewer.viewReport(print,false);
             } catch (JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
     }//GEN-LAST:event_MenRelES2ActionPerformed
@@ -438,7 +438,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
    TelaFiltro filtro= new TelaFiltro();
         filtro.setVisible(true);
          Desktop.add(filtro);
-         
+      
     }//GEN-LAST:event_MenRelES3ActionPerformed
 
     private void MenRelES4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenRelES4ActionPerformed

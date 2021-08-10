@@ -4,6 +4,7 @@ import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 public class TelaCliente3 extends javax.swing.JInternalFrame {
@@ -30,8 +31,8 @@ public class TelaCliente3 extends javax.swing.JInternalFrame {
 
             tblPessoas.setModel(DbUtils.resultSetToTableModel(rs));
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException e) {
+         JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -85,21 +86,15 @@ public class TelaCliente3 extends javax.swing.JInternalFrame {
                     if (adicionado > 0) {
                         JOptionPane.showMessageDialog(null, "Pessoa adicionada com sucesso!");
                         pst.setString(1, txtPsNome.getText());
-
-                        txtPsNome.setText(null);
-                     
-                     
-                        txtPsRG.setText(null);
-                        txtPsCPF.setText(null);
-                        txtPsDat.setText(null);
-                     
-                        txtPsId.setText(null);
+                        
+                         limpar();
+                                 
                     }
                 }
 
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -128,20 +123,14 @@ public class TelaCliente3 extends javax.swing.JInternalFrame {
             if (adicionado > 0) {
                 JOptionPane.showMessageDialog(null, "Dados da Pessoa alterada com sucesso!");
                 pst.setString(1, txtPsNome.getText());
-
-                     txtPsNome.setText(null);
+                
+                  limpar();
                   
-                    
-                        txtPsRG.setText(null);
-                        txtPsCPF.setText(null);
-                        txtPsDat.setText(null);
-                     
-
                 btnCliCreate.setEnabled(true);
 
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -158,22 +147,28 @@ public class TelaCliente3 extends javax.swing.JInternalFrame {
                 if (apagado > 0) {
                     JOptionPane.showMessageDialog(null, "Dados da Pessoa removido com sucesso!");
 
-                 txtPsNome.setText(null);
-                     
-                     
+                limpar();
+
+                }
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+            }
+        }
+
+    }
+    
+    private void limpar(){
+                        txtPsPesquisar.setText(null); 
+                       txtPsNome.setText(null);
                         txtPsRG.setText(null);
                         txtPsCPF.setText(null);
                         txtPsDat.setText(null);
                      
                         txtPsId.setText(null);
-
-                }
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        }
-
-    }
+                   
+                    ((DefaultTableModel)tblPessoas.getModel()).setRowCount(0);
+}
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -264,6 +259,11 @@ public class TelaCliente3 extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setText("RG");
 
+        tblPessoas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblPessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -286,6 +286,7 @@ public class TelaCliente3 extends javax.swing.JInternalFrame {
             }
         });
         tblPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblPessoas.getTableHeader().setReorderingAllowed(false);
         tblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPessoasMouseClicked(evt);
@@ -338,19 +339,18 @@ public class TelaCliente3 extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel15)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtPsDat))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtPsRG))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtPsCPF))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtPsNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtPsRG))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtPsCPF))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPsNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

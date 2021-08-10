@@ -148,7 +148,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenReles.add(MenRelES);
 
         MenRelES1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
-        MenRelES1.setText("Entrada e Saida");
+        MenRelES1.setText("Filtro Pessoas");
         MenRelES1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenRelES1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,11 +260,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             //imprimindo relatório com o framework JasperReports
             try {
                 //Usando a classe JasperPrint para preparar a impressão de um relatório
-                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/EntradaSaida2.jasper",null,conecxao);
+                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/EntradaSaida2.jasper",null,conecxao);
                 //a linha abaixo exibe o relatório através da classe JasperViewer
                 JasperViewer.viewReport(print,false);
             } catch (JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+                JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
     }//GEN-LAST:event_MenRelESActionPerformed

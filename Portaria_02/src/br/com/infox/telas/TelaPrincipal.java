@@ -147,7 +147,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         MenReles.add(MenRelES);
 
-        MenRelES1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        MenRelES1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
         MenRelES1.setText("Filtro Chaves");
         MenRelES1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenRelES1.addActionListener(new java.awt.event.ActionListener() {
@@ -264,7 +264,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 //a linha abaixo exibe o relatório através da classe JasperViewer
                 JasperViewer.viewReport(print,false);
             } catch (JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+              JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
     }//GEN-LAST:event_MenRelESActionPerformed
@@ -291,6 +291,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
          TelaFiltro filtro = new TelaFiltro();
         filtro.setVisible(true);
+        Desktop.add(filtro);
     }//GEN-LAST:event_MenRelES1ActionPerformed
 
     /**

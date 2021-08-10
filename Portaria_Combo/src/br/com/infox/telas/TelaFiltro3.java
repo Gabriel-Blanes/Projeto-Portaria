@@ -2,7 +2,6 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
-import java.awt.HeadlessException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -36,8 +35,8 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
 
             tblPessoas.setModel(DbUtils.resultSetToTableModel(rs));
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException e) {
+             JOptionPane.showMessageDialog(null,"ocorreu um erro:" +e);
         }
 
     }
@@ -80,6 +79,7 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Tela-Filtro-Frota");
 
         btnFiltroIm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/print.png"))); // NOI18N
         btnFiltroIm.setToolTipText("Imprimir");
@@ -157,7 +157,7 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setText("placa");
+        jLabel8.setText("Placa");
 
         buttonGroup1.add(RadioPlacaNome);
         RadioPlacaNome.setText("Placa e nome");
@@ -268,6 +268,11 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
             }
         });
 
+        tblPessoas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblPessoas.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblPessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -295,6 +300,8 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
             }
         });
         tblPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblPessoas.setFocusable(false);
+        tblPessoas.getTableHeader().setReorderingAllowed(false);
         tblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPessoasMouseClicked(evt);
@@ -315,14 +322,15 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(txtCliid, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPsNome, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(txtPsNome, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,12 +363,10 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFiltroIm, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFiltroIm, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(265, 265, 265))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,18 +375,17 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnFiltroIm)
-                .addContainerGap())
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFiltroImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroImActionPerformed
-
-      
-        
+     
+       
         if(RadioMesAll.isSelected()){
 
             int confirma = JOptionPane.showConfirmDialog(null,"Confirma a emissão deste relatório?","ATENÇÃO!!",JOptionPane.YES_NO_OPTION);
@@ -390,11 +395,11 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
                     HashMap Filtro = new  HashMap();
                     Filtro.put("nome",(txtPsNome.getText()));
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas5.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroPessoas5.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                  JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
@@ -411,11 +416,11 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
                     Filtro.put("ES",(TxtMes.getText()));
 
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas2.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroPessoas2.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+               JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
@@ -432,11 +437,11 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
                     Filtro.put("ES",(TxtMes.getText()));
                     Filtro.put("ES1",(TxtMes1.getText()));
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas3.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroPessoas3.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                   JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
@@ -450,14 +455,14 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
                 try {
                     HashMap Filtro = new  HashMap();
                     Filtro.put("nome",(txtPsNome.getText()));
-                    Filtro.put("placa",(cbOSPl.getSelectedItem().toString()));
+                    Filtro.put("placa",(cbOSPl.getSelectedItem().toString() + '%'));
 
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroFrota1.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroFrota1.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                    JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
@@ -474,14 +479,18 @@ public class TelaFiltro3 extends javax.swing.JInternalFrame {
                     Filtro.put("placa",(cbOSPl.getSelectedItem().toString()));
 
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroFrota2.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroFrota2.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                  JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
         }
+        else{
+                 JOptionPane.showMessageDialog(null,"Não foi selecionado algum campo das opções do campo Filtro.Por favor,selecione e preencha os campos que apareceu das demais opções, apos selecionar uma opção do campo Filtro!!");
+            }
+     
     }//GEN-LAST:event_btnFiltroImActionPerformed
 
     private void RadioMesAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioMesAllActionPerformed

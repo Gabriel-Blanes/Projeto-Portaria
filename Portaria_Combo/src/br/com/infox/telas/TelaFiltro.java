@@ -2,7 +2,6 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
-import java.awt.HeadlessException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -36,8 +35,8 @@ public class TelaFiltro extends javax.swing.JInternalFrame {
 
             tblPessoas.setModel(DbUtils.resultSetToTableModel(rs));
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException e) {
+           JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -49,6 +48,13 @@ public class TelaFiltro extends javax.swing.JInternalFrame {
       txtPsNome.setText(tblPessoas.getModel().getValueAt(setar, 1).toString());
 
     }
+     
+     
+     
+       
+     
+     
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,7 +84,7 @@ public class TelaFiltro extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Tela-Filtro");
+        setTitle("Tela-Filtro-Pessoas");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoas"));
         jPanel2.setName("Pessoas"); // NOI18N
@@ -117,6 +123,11 @@ public class TelaFiltro extends javax.swing.JInternalFrame {
             }
         });
 
+        tblPessoas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblPessoas.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblPessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,6 +155,8 @@ public class TelaFiltro extends javax.swing.JInternalFrame {
             }
         });
         tblPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblPessoas.setFocusable(false);
+        tblPessoas.getTableHeader().setReorderingAllowed(false);
         tblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPessoasMouseClicked(evt);
@@ -164,11 +177,11 @@ public class TelaFiltro extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCliid, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCliid, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 40, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel2)
@@ -351,25 +364,30 @@ public class TelaFiltro extends javax.swing.JInternalFrame {
 
     private void btnFiltroImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroImActionPerformed
 
-        if(RadioMesAll.isSelected()){
-
-            int confirma = JOptionPane.showConfirmDialog(null,"Confirma a emissão deste relatório?","ATENÇÃO!!",JOptionPane.YES_NO_OPTION);
-            if (confirma == JOptionPane.YES_OPTION){
-                //imprimindo relatório com o framework JasperReports
-                try {
-                    HashMap Filtro = new  HashMap();
-                    Filtro.put("nome",(txtPsNome.getText()));
-                    //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas.jasper",Filtro,conecxao);
-                    //a linha abaixo exibe o relatório através da classe JasperViewer
-                    JasperViewer.viewReport(print,false);
-                } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+        
+     
+            
+            if(RadioMesAll.isSelected()){
+                
+                int confirma = JOptionPane.showConfirmDialog(null,"Confirma a emissão deste relatório?","ATENÇÃO!!",JOptionPane.YES_NO_OPTION);
+                if (confirma == JOptionPane.YES_OPTION){
+                    //imprimindo relatório com o framework JasperReports
+                    try {
+                        HashMap Filtro = new  HashMap();
+                        Filtro.put("nome",(txtPsNome.getText()));
+                        //Usando a classe JasperPrint para preparar a impressão de um relatório
+                        JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroPessoas.jasper",Filtro,conecxao);
+                        //a linha abaixo exibe o relatório através da classe JasperViewer
+                        JasperViewer.viewReport(print,false);
+                    } catch (JRException e) {
+                        JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+                    }
                 }
+                
             }
-
-        }
-        else if(RadioMesOne.isSelected()){
+            
+            
+            else if(RadioMesOne.isSelected()){
 
             int confirmaa = JOptionPane.showConfirmDialog(null,"Confirma a emissão deste relatório?","ATENÇÃO!!",JOptionPane.YES_NO_OPTION);
             if (confirmaa == JOptionPane.YES_OPTION){
@@ -381,42 +399,47 @@ public class TelaFiltro extends javax.swing.JInternalFrame {
                     Filtro.put("ES",(TxtMes.getText()));
 
                     //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas2.jasper",Filtro,conecxao);
+                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroPessoas2.jasper",Filtro,conecxao);
                     //a linha abaixo exibe o relatório através da classe JasperViewer
                     JasperViewer.viewReport(print,false);
                 } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+                    JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
                 }
             }
 
         }
-
-        else if(RadioEntreMes.isSelected()){
-
-            int confirmaaa = JOptionPane.showConfirmDialog(null,"Confirma a emissão deste relatório?","ATENÇÃO!!",JOptionPane.YES_NO_OPTION);
-            if (confirmaaa == JOptionPane.YES_OPTION){
-                //imprimindo relatório com o framework JasperReports
-                try {
-                    HashMap Filtro = new  HashMap();
-                    Filtro.put("nome",(txtPsNome.getText()));
-                    Filtro.put("ES",(TxtMes.getText()));
-                    Filtro.put("ES1",(TxtMes1.getText()));
-                    //Usando a classe JasperPrint para preparar a impressão de um relatório
-                    JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas3.jasper",Filtro,conecxao);
-                    //a linha abaixo exibe o relatório através da classe JasperViewer
-                    JasperViewer.viewReport(print,false);
-                } catch (JRException e) {
-                    JOptionPane.showMessageDialog(null, e);
+            
+            else if(RadioEntreMes.isSelected()){
+                
+                int confirmaaa = JOptionPane.showConfirmDialog(null,"Confirma a emissão deste relatório?","ATENÇÃO!!",JOptionPane.YES_NO_OPTION);
+                if (confirmaaa == JOptionPane.YES_OPTION){
+                    //imprimindo relatório com o framework JasperReports
+                    try {
+                        HashMap Filtro = new  HashMap();
+                        Filtro.put("nome",(txtPsNome.getText()));
+                        Filtro.put("ES",(TxtMes.getText()));
+                        Filtro.put("ES1",(TxtMes1.getText()));
+                        //Usando a classe JasperPrint para preparar a impressão de um relatório
+                        JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/FiltroPessoas3.jasper",Filtro,conecxao);
+                        //a linha abaixo exibe o relatório através da classe JasperViewer
+                        JasperViewer.viewReport(print,false);
+                    } catch (JRException e) {
+                        JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+                    }
                 }
+                
             }
-
-        }
+            else{
+                 JOptionPane.showMessageDialog(null,"Não foi selecionado algum campo das opções do campo Filtro.Por favor,selecione e preencha os campos que apareceu das demais opções, apos selecionar uma opção do campo Filtro!!");
+            }
+        
+       
     }//GEN-LAST:event_btnFiltroImActionPerformed
 
     private void RadioMesAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioMesAllActionPerformed
         // TODO add your handling code here:
         if(RadioMesAll.isSelected()){
-            TxtMes.setEnabled(false);
+            TxtMes.setEnabled(false);   
             TxtMes1.setEnabled(false);
         }
     }//GEN-LAST:event_RadioMesAllActionPerformed

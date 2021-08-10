@@ -43,7 +43,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtOSEn" min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="cbOSPort" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
+                          <Component id="txtOSSai" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnOSDelete" min="-2" max="-2" attributes="0"/>
@@ -55,11 +55,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="cbOSAuto" min="-2" pref="156" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -70,9 +65,16 @@
                                   <Component id="cbOsSit" min="-2" pref="159" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="txtOSSai" min="-2" pref="156" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="cbOSAuto" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="cbOSPort" min="-2" pref="156" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -153,7 +155,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -169,7 +171,7 @@
             <StringItem index="0" value="Selecione uma op&#xe7;&#xe3;o"/>
             <StringItem index="1" value="Alessandro"/>
             <StringItem index="2" value="Concei&#xe7;&#xe3;o"/>
-            <StringItem index="3" value="Valter"/>
+            <StringItem index="3" value="Eduardo"/>
             <StringItem index="4" value="Pamela"/>
             <StringItem index="5" value="Robson"/>
             <StringItem index="6" value="Marcelo"/>
@@ -177,9 +179,6 @@
             <StringItem index="8" value="Willy"/>
             <StringItem index="9" value=" "/>
           </StringArray>
-        </Property>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor em Forma de M&#xe3;o"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -195,7 +194,7 @@
           <StringArray count="5">
             <StringItem index="0" value="Selecione uma op&#xe7;&#xe3;o"/>
             <StringItem index="1" value="Edson"/>
-            <StringItem index="2" value="Elisandro"/>
+            <StringItem index="2" value="Elizandro"/>
             <StringItem index="3" value="Nildo "/>
             <StringItem index="4" value="Vaine"/>
           </StringArray>
@@ -282,7 +281,8 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="119" max="-2" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -330,13 +330,17 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Cursor em Forma de M&#xe3;o"/>
                 </Property>
+                <Property name="focusable" type="boolean" value="false"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                  <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblClientesMouseClicked"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblClientes = new javax.swing.JTable(){&#xa;public boolean isCellEditable(int rowIdenx, int colIndex){&#xa;return false;&#xa;   }&#xa;};"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
