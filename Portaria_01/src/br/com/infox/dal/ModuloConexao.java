@@ -10,10 +10,10 @@ public class ModuloConexao {
     {
     java.sql.Connection conecxao = null;
      // a limnha a baixo "chama" o driver       
-    String driver ="com.mysql.jdbc.Driver";
+    String driver ="com.mysql.cj.jdbc.Driver";
     //armazenando imforamações referente ao banco de dados
-     String url = "jdbc:mysql://10.10.3.15:3306/portaria_01";
-     String user = "mklogistica";
+     String url = "jdbc:mysql://localhost:3306/portaria_01";
+     String user = "root";
      String password= "root";
      //estabelecer a conexão com o banco de dados
         try {

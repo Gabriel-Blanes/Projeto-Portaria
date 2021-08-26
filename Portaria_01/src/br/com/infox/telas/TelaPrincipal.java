@@ -45,6 +45,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menAjuSob = new javax.swing.JMenuItem();
         MenReles = new javax.swing.JMenu();
         MenRelES = new javax.swing.JMenuItem();
+        MenRelES1 = new javax.swing.JMenuItem();
         menOp = new javax.swing.JMenu();
         menOpSair = new javax.swing.JMenuItem();
 
@@ -73,9 +74,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/Logo MK - Novo.png"))); // NOI18N
 
         menCad.setText("Cadastro");
+        menCad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         menCadCli.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         menCadCli.setText("Pessoas");
+        menCadCli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menCadCliActionPerformed(evt);
@@ -85,6 +88,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadOS.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
         menCadOS.setText("Entrada e Saida");
+        menCadOS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menCadOSActionPerformed(evt);
@@ -94,6 +98,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadUsu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menCadUsu.setText("Usuários");
+        menCadUsu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menCadUsu.setEnabled(false);
         menCadUsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +110,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Menu.add(menCad);
 
         menAju.setText("Ajuda");
+        menAju.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menAju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menAjuActionPerformed(evt);
@@ -113,6 +119,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menAjuSob.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
         menAjuSob.setText("Sobre");
+        menAjuSob.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menAjuSob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menAjuSobActionPerformed(evt);
@@ -123,6 +130,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Menu.add(menAju);
 
         MenReles.setText("Relatório");
+        MenReles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenReles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenRelesActionPerformed(evt);
@@ -131,6 +139,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         MenRelES.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         MenRelES.setText("Entrada e Saida");
+        MenRelES.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenRelES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenRelESActionPerformed(evt);
@@ -138,12 +147,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         MenReles.add(MenRelES);
 
+        MenRelES1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
+        MenRelES1.setText("Filtro Pessoas");
+        MenRelES1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MenRelES1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenRelES1ActionPerformed(evt);
+            }
+        });
+        MenReles.add(MenRelES1);
+
         Menu.add(MenReles);
 
         menOp.setText("Opções");
+        menOp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         menOpSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         menOpSair.setText("Sair");
+        menOpSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menOpSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menOpSairActionPerformed(evt);
@@ -239,11 +260,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             //imprimindo relatório com o framework JasperReports
             try {
                 //Usando a classe JasperPrint para preparar a impressão de um relatório
-                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/EntradaSaida2.jasper",null,conecxao);
+                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Programa/Reports/EntradaSaida2.jasper",null,conecxao);
                 //a linha abaixo exibe o relatório através da classe JasperViewer
                 JasperViewer.viewReport(print,false);
             } catch (JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+                JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
     }//GEN-LAST:event_MenRelESActionPerformed
@@ -265,6 +286,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_menOpSairActionPerformed
+
+    private void MenRelES1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenRelES1ActionPerformed
+        // TODO add your handling code here:
+        TelaFiltro filtro = new TelaFiltro();
+        filtro.setVisible(true);
+        Desktop.add(filtro);
+        
+    }//GEN-LAST:event_MenRelES1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,6 +333,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuItem MenRelES;
+    private javax.swing.JMenuItem MenRelES1;
     private javax.swing.JMenu MenReles;
     private javax.swing.JMenuBar Menu;
     private javax.swing.JLabel jLabel1;
