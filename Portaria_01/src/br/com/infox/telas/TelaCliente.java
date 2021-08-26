@@ -3,8 +3,14 @@ package br.com.infox.telas;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import java.awt.HeadlessException;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class TelaCliente extends javax.swing.JInternalFrame {
 
@@ -30,8 +36,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
             tblPessoas.setModel(DbUtils.resultSetToTableModel(rs));
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -94,21 +100,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "Pessoa adicionada com sucesso!");
                         pst.setString(1, txtPsNome.getText());
 
-                        txtPsNome.setText(null);
-                     
-                        txtPsEm.setText(null);
-                        txtPsRG.setText(null);
-                        txtPsCPF.setText(null);
-                        txtPsDat.setText(null);
-                        txtPsCar.setText(null);
-                        txtPsMot.setText(null);
-                        txtPsId.setText(null);
+                      limpar();
                     }
                 }
 
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -142,21 +140,13 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Dados da Pessoa alterada com sucesso!");
                 pst.setString(1, txtPsNome.getText());
 
-                     txtPsNome.setText(null);
-                  
-                        txtPsEm.setText(null);
-                        txtPsRG.setText(null);
-                        txtPsCPF.setText(null);
-                        txtPsDat.setText(null);
-                        txtPsCar.setText(null);
-                        txtPsMot.setText(null);
-                        txtPsId.setText(null);
+                 limpar();
 
                 btnCliCreate.setEnabled(true);
 
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -173,8 +163,20 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 if (apagado > 0) {
                     JOptionPane.showMessageDialog(null, "Dados da Pessoa removido com sucesso!");
 
-                 txtPsNome.setText(null);
-                     
+                 limpar();
+
+                }
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+            }
+        }
+
+    }
+    
+    private void limpar(){
+    
+                       txtPsPesquisar.setText(null);
+                       txtPsNome.setText(null);
                         txtPsEm.setText(null);
                         txtPsRG.setText(null);
                         txtPsCPF.setText(null);
@@ -183,13 +185,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         txtPsMot.setText(null);
                         txtPsId.setText(null);
 
-                }
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        }
-
-    }
+                 
+                    ((DefaultTableModel)tblPessoas.getModel()).setRowCount(0);
+}
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -222,6 +221,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         txtPsEm = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnCliUpdate = new javax.swing.JButton();
+        btnCliIm1 = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -308,6 +308,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jLabel2.setText("*Nome");
 
         cbPsMot.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ajudante", "Colaborador", "Cliente", "Entrevista", "Prestador de Serviço", "Visitante" }));
+        cbPsMot.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbPsMot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPsMotActionPerformed(evt);
@@ -336,6 +337,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/pesquisar.png"))); // NOI18N
 
+        tblPessoas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblPessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -357,6 +363,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblPessoas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblPessoas.setFocusable(false);
+        tblPessoas.getTableHeader().setReorderingAllowed(false);
         tblPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPessoasMouseClicked(evt);
@@ -387,30 +396,21 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCliIm1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/print.png"))); // NOI18N
+        btnCliIm1.setToolTipText("Imprimir");
+        btnCliIm1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCliIm1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCliIm1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnCliDelete)
-                        .addGap(112, 112, 112)
-                        .addComponent(btnCliCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCliUpdate)
-                        .addGap(13, 13, 13))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel13)
-                        .addGap(17, 17, 17)
-                        .addComponent(txtPsDest, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPsCar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel2)
@@ -453,8 +453,31 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel5)
                         .addGap(22, 22, 22)
-                        .addComponent(txtPsMot, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPsMot, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(28, 28, 28)
+                            .addComponent(btnCliDelete)
+                            .addGap(62, 62, 62)
+                            .addComponent(btnCliCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(52, 52, 52)
+                            .addComponent(btnCliUpdate)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCliIm1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel13)
+                            .addGap(17, 17, 17)
+                            .addComponent(txtPsDest, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtPsCar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 44, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,16 +520,19 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                     .addComponent(txtPsDest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txtPsCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPsMot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnCliCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCliDelete))
-                    .addComponent(btnCliUpdate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtPsMot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnCliCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCliDelete))
+                            .addComponent(btnCliUpdate)))
+                    .addComponent(btnCliIm1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(32, 32, 32))
         );
 
@@ -560,6 +586,24 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         alterar();
     }//GEN-LAST:event_btnCliUpdateActionPerformed
 
+    private void btnCliIm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliIm1ActionPerformed
+        // chamando o metodo imprimir_es
+        int confirma = JOptionPane.showConfirmDialog(null,"Confirma a emissão deste relatório?","ATENÇÃO!!",JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_OPTION){
+            //imprimindo relatório com o framework JasperReports
+            try {
+                HashMap Filtro = new  HashMap();
+                Filtro.put("nome",(txtPsNome.getText()));
+                //Usando a classe JasperPrint para preparar a impressão de um relatório
+                JasperPrint print = JasperFillManager.fillReport("M:/Portaria/Reports/FiltroPessoas.jasper",Filtro,conecxao);
+                //a linha abaixo exibe o relatório através da classe JasperViewer
+                JasperViewer.viewReport(print,false);
+            } catch (JRException e) {
+               JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+            }
+        }
+    }//GEN-LAST:event_btnCliIm1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -598,6 +642,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliCreate;
     private javax.swing.JButton btnCliDelete;
+    private javax.swing.JButton btnCliIm1;
     private javax.swing.JButton btnCliUpdate;
     private javax.swing.JComboBox<String> cbPsMot;
     private javax.swing.JLabel jLabel1;

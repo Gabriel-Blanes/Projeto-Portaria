@@ -36,21 +36,21 @@ order by en_id;]]>
 	</background>
 	<title>
 		<band height="106" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="236" height="106" uuid="d79d3ae2-7dee-4906-b043-9861bce99af7"/>
-				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="252" y="42" width="184" height="35" uuid="5c9e86a4-1e47-4c68-97ae-8d7711ab95c3"/>
+				<reportElement x="252" y="42" width="338" height="35" uuid="5c9e86a4-1e47-4c68-97ae-8d7711ab95c3"/>
 				<textElement>
 					<font size="22" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ Entrada e Saida]]></text>
+				<text><![CDATA[ Entrada e Saida de Pessoas]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="455" y="0" width="100" height="20" uuid="bf33c879-9296-43f1-b0f1-4571619ef7ed"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="0" width="182" height="106" uuid="dea233cd-765c-4fa3-9bd9-d87b51c98929"/>
+				<imageExpression><![CDATA["M:\\RH-Informa\\Logo MK - Novo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
