@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -20,7 +21,7 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    private String tipo;
+  
 
     public TelaOS3() {
         initComponents();
@@ -42,7 +43,7 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
             tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -62,15 +63,17 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
 
             pst = conecxao.prepareStatement(sql);
 
-           
-            pst.setString(1, cbOSPl.getSelectedItem().toString());
-            pst.setString(2, cbOsSit.getSelectedItem().toString());
+       
+            
+               
+            pst.setString(1,cbOSPl.getSelectedItem().toString());
+            pst.setString(2,cbOsSit.getSelectedItem().toString());
             pst.setString(3,txtOSDest.getText());
             pst.setString(4,txtOSKmS.getText());
             pst.setString(5,txtOSKmE.getText());
             pst.setString(6,txtOSKmR.getText());
-            pst.setString(7, txtOSSai.getText());
-            pst.setString(8, txtOSEn.getText());
+            pst.setString(7,txtOSSai.getText());
+            pst.setString(8,txtOSEn.getText());
             pst.setString(9,txtCliid.getText());
      
        
@@ -84,20 +87,12 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
               if (adicionado > 0) {
                   JOptionPane.showMessageDialog(null, "Entrada e Saida da frota adicionada com sucesso!");
                   
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-                  
-                   txtCliid.setText(null);
+                 limpar();
               }
           }
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -130,17 +125,17 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "E/S da frota não cadastrada!");
 
             }
-        } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e) {
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "E/S  de frota invalida!");
             //System.out.println(e);
 
-        } catch (HeadlessException | SQLException m) {
-            JOptionPane.showMessageDialog(null, m);
+        } catch (Exception m) {
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +m);
         }
     }
 
     private void alterar() {
-        String sql = "update entrada_saida3 set en_placa_modelo = ?,en_situacao = ?,en_dest = ?,en_km_sai = ?,en_km_en  = ?,en_km_ro = ?,en_data_sai = ? ,en_data_en = ?where en_id =?";
+        String sql = "update entrada_saida3 set en_placa_modelo = ?,en_situacao = ?,en_dest = ?,en_km_sai = ?,en_km_en  = ?,en_km_ro = ?,en_data_sai = ? ,en_data_en = ? where en_id =?";
 
       
         try {
@@ -168,17 +163,7 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Dados de Entrada e Saida da frota alteradas com sucesso!");
                       
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-             
-              
-             
-                    txtCliid.setText(null);
+                   limpar();
 
                     btnOSCreate.setEnabled(true);
                     txtCliPesquisar.setEnabled(true);
@@ -187,7 +172,7 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
             }
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -205,15 +190,7 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Dados de Entrada e Saida da frota Removidas com sucesso!");
                 }
                 
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-             
-                    txtCliid.setText(null);
+               limpar();
                     
                 btnOSCreate.setEnabled(true);
                 txtCliPesquisar.setEnabled(true);
@@ -221,7 +198,7 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
 
             } catch (HeadlessException | SQLException e) {
 
-                JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
 
         }
@@ -243,7 +220,7 @@ public class TelaOS3 extends javax.swing.JInternalFrame {
                 //a linha abaixo exibe o relatório através da classe JasperViewer
              JasperViewer.viewReport(print,false);                  
             } catch (NumberFormatException | JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+                 JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
      
@@ -255,7 +232,7 @@ private  void km()
         
                String placa = cbOSPl.getSelectedItem().toString(); //aqui estou pegando a variavel do combobox
 
-      String sql = "select max(en_km_en), max(en_km_sai) "
+      String sql = "select max(en_km_sai), max(en_km_en) "
                     +"from entrada_saida3 " 
                     +"where en_placa_modelo = ?;"; //select para executar as funções max
 
@@ -266,22 +243,31 @@ private  void km()
         {
             //caso de certo, true, pega o resultado, que é o resultSet do banco e seta nos campos os valores
             //da query 
-            txtOSKmE.setText(rs.getString(1)); 
-            txtOSKmS.setText(rs.getString(2));
+            txtOSKmS.setText(rs.getString(1));
+            txtOSKmE.setText(rs.getString(2)); 
+           
 
         }
         
         
-    } catch (Exception e) {
+    } catch (SQLException e) {
+         JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
     }
 
 } 
   private void calculaKm()
   {
+      try{
       Double kmEntrada =  Double.parseDouble(txtOSKmE.getText());
       Double kmSaida = Double.parseDouble(txtOSKmS.getText());
       Double kmResultado = kmEntrada - kmSaida;
       txtOSKmR.setText(kmResultado.toString());
+           
+      } catch (NumberFormatException e) {
+        
+       JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+    }
+
   }
         
 private  void getCbDados()
@@ -318,38 +304,34 @@ private  void getCbDados()
     }
   catch(Exception e)
     {
+  JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+    }
+       
+       
+    }
+
+private void limpar(){
     
-    }
-       
-       
-    }
+                    txtCliPesquisar.setText(null);
+                     txtOsEs.setText(null);
+                     txtOSDest.setText(null);
+                     txtOSKmE.setText(null);
+                     txtOSKmS.setText(null);
+                     txtOSKmR.setText(null);
+                     txtOSEn.setText(null);
+                     txtOSSai.setText(null);
+             
+                    txtCliid.setText(null);
+                    cbOSPl.setSelectedItem(null);
+                    cbOsSit.setSelectedItem(null);
+                    
+                    ((DefaultTableModel)tblClientes.getModel()).setRowCount(0);
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtOSDest = new javax.swing.JTextField();
-        txtOSSai = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtOSEn = new javax.swing.JTextField();
-        btnOSDelete = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        btnOSCalc = new javax.swing.JButton();
-        btnOSRead = new javax.swing.JButton();
-        btnOSUpdate = new javax.swing.JButton();
-        txtOSKmR = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        btnCliIm = new javax.swing.JButton();
-        btnOSCreate = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        txtOSKmS = new javax.swing.JTextField();
-        cbOSPl = new javax.swing.JComboBox<>();
-        txtOSKmE = new javax.swing.JTextField();
-        cbOsSit = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         txtCliPesquisar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -359,6 +341,28 @@ private  void getCbDados()
         txtCliid = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtOsEs = new javax.swing.JTextField();
+        btnOSCreate = new javax.swing.JButton();
+        btnOSRead = new javax.swing.JButton();
+        btnOSCalc = new javax.swing.JButton();
+        btnCliIm = new javax.swing.JButton();
+        btnOSUpdate = new javax.swing.JButton();
+        btnOSDelete = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        cbOSPl = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        cbOsSit = new javax.swing.JComboBox<>();
+        jLabel21 = new javax.swing.JLabel();
+        txtOSDest = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtOSKmS = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtOSKmE = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtOSKmR = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtOSSai = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtOSEn = new javax.swing.JTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -366,136 +370,9 @@ private  void getCbDados()
         setMaximizable(true);
         setResizable(true);
         setTitle("Controle-de- Entrada-e-Saida-da-Frota");
-        setFocusCycleRoot(false);
-
-        txtOSDest.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-
-        txtOSSai.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        txtOSSai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtOSSaiActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel9.setText("Data de saida");
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("*Situação");
-
-        txtOSEn.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-
-        btnOSDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
-        btnOSDelete.setToolTipText("Remover");
-        btnOSDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOSDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOSDeleteActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel5.setText("Data de entrada");
-
-        btnOSCalc.setToolTipText("Remover");
-        btnOSCalc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOSCalc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOSCalcActionPerformed(evt);
-            }
-        });
-
-        btnOSRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/read.png"))); // NOI18N
-        btnOSRead.setToolTipText("Consultar");
-        btnOSRead.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOSRead.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOSReadActionPerformed(evt);
-            }
-        });
-
-        btnOSUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/update.png"))); // NOI18N
-        btnOSUpdate.setToolTipText("Alterar");
-        btnOSUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOSUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOSUpdateActionPerformed(evt);
-            }
-        });
-
-        txtOSKmR.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel10.setText("Km de entrada");
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setText("*Campos Obrigatórios");
-
-        jLabel19.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel19.setText("Km de saida");
-
-        jLabel21.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel21.setText("Destino");
-
-        btnCliIm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/print.png"))); // NOI18N
-        btnCliIm.setToolTipText("Imprimir");
-        btnCliIm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCliIm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCliImActionPerformed(evt);
-            }
-        });
-
-        btnOSCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/create.png"))); // NOI18N
-        btnOSCreate.setToolTipText("Adicionar");
-        btnOSCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOSCreate.setPreferredSize(new java.awt.Dimension(80, 80));
-        btnOSCreate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOSCreateActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setText("*placa");
-
-        jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel20.setText("Km Rodado");
-
-        txtOSKmS.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-
-        cbOSPl.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        cbOSPl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "EVA 2366 ÔNIX", "EXU 1948 ÔNIX", "FHE 1321 TOWNER", "FZH 0439 QQ", "FWF-7005 FIAT", " " }));
-        cbOSPl.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbOSPlItemStateChanged(evt);
-            }
-        });
-        cbOSPl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbOSPlMouseClicked(evt);
-            }
-        });
-        cbOSPl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOSPlActionPerformed(evt);
-            }
-        });
-
-        txtOSKmE.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-
-        cbOsSit.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        cbOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Na planta", "Encerrada" }));
-        cbOsSit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbOsSitMouseClicked(evt);
-            }
-        });
-        cbOsSit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOsSitActionPerformed(evt);
-            }
-        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoas"));
         jPanel2.setName("Pessoas"); // NOI18N
@@ -514,6 +391,11 @@ private  void getCbDados()
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/pesquisar.png"))); // NOI18N
 
+        tblClientes = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblClientes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -540,6 +422,9 @@ private  void getCbDados()
                 return types [columnIndex];
             }
         });
+        tblClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblClientes.setFocusable(false);
+        tblClientes.getTableHeader().setReorderingAllowed(false);
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
@@ -574,113 +459,253 @@ private  void getCbDados()
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addGap(30, 30, 30))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtCliPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addGap(26, 26, 26)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(txtCliid, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(txtOsEs, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(txtOsEs, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(txtCliid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtCliPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCliPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtCliid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtOsEs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        btnOSCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/create.png"))); // NOI18N
+        btnOSCreate.setToolTipText("Adicionar");
+        btnOSCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOSCreate.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnOSCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOSCreateActionPerformed(evt);
+            }
+        });
+
+        btnOSRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/read.png"))); // NOI18N
+        btnOSRead.setToolTipText("Consultar");
+        btnOSRead.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOSRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOSReadActionPerformed(evt);
+            }
+        });
+
+        btnOSCalc.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnOSCalc.setText("=");
+        btnOSCalc.setToolTipText("Remover");
+        btnOSCalc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOSCalc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOSCalcActionPerformed(evt);
+            }
+        });
+
+        btnCliIm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/print.png"))); // NOI18N
+        btnCliIm.setToolTipText("Imprimir");
+        btnCliIm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCliIm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCliImActionPerformed(evt);
+            }
+        });
+
+        btnOSUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/update.png"))); // NOI18N
+        btnOSUpdate.setToolTipText("Alterar");
+        btnOSUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOSUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOSUpdateActionPerformed(evt);
+            }
+        });
+
+        btnOSDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
+        btnOSDelete.setToolTipText("Remover");
+        btnOSDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOSDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOSDeleteActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setText("*Placa");
+
+        cbOSPl.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        cbOSPl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "EVA 2366 ÔNIX", "EXU 1948 ÔNIX", "FHE 1321 TOWNER", "FZH 0439 QQ", "FWF-7A05 FIAT", " " }));
+        cbOSPl.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbOSPlItemStateChanged(evt);
+            }
+        });
+        cbOSPl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbOSPlMouseClicked(evt);
+            }
+        });
+        cbOSPl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbOSPlActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setText("*Situação");
+
+        cbOsSit.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        cbOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Na planta", "Encerrada" }));
+        cbOsSit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbOsSit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbOsSitMouseClicked(evt);
+            }
+        });
+        cbOsSit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbOsSitActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel21.setText("Destino");
+
+        txtOSDest.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel19.setText("Km de saida");
+
+        txtOSKmS.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setText("Km de entrada");
+
+        txtOSKmE.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel20.setText("Km Rodado");
+
+        txtOSKmR.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel9.setText("Data de saida");
+
+        txtOSSai.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        txtOSSai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOSSaiActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel5.setText("Data de entrada");
+
+        txtOSEn.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel21)
-                            .addComponent(jLabel20)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtOSKmE, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel19)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtOSDest, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtOSKmR, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtOSKmS, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(43, 43, 43)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbOSPl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbOsSit, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbOSPl, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(cbOsSit, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(92, 92, 92)
+                                        .addComponent(txtOSDest, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(11, 11, 11)
                                 .addComponent(btnOSCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCliIm, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addComponent(btnCliIm))
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtOSEn, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtOSSai, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel20)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtOSKmE, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel19)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(92, 92, 92)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtOSKmR, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtOSKmS, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
                                 .addComponent(btnOSRead)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnOSCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnOSDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnOSUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 25, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtOSEn, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtOSSai, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(208, 208, 208)
-                                .addComponent(jLabel7)))
-                        .addGap(13, 13, 13)))
-                .addGap(22, 22, 22))
+                            .addComponent(btnOSUpdate)
+                            .addComponent(btnOSDelete))
+                        .addContainerGap(35, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(199, 199, 199)
+                .addComponent(jLabel7)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel7)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnOSCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCliIm)
+                        .addComponent(btnOSUpdate))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -694,8 +719,13 @@ private  void getCbDados()
                             .addComponent(txtOSDest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(jLabel21)))
-                        .addGap(18, 18, 18)
+                                .addComponent(jLabel21)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOSCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOSDelete)
+                    .addComponent(btnOSRead)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(txtOSKmS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -706,88 +736,20 @@ private  void getCbDados()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
-                            .addComponent(txtOSKmR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnOSCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCliIm)
-                            .addComponent(btnOSUpdate))
+                            .addComponent(txtOSKmR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnOSCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOSDelete)))
-                    .addComponent(btnOSRead))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtOSSai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtOSEn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(0, 18, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtOSSai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtOSEn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtOSSaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOSSaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtOSSaiActionPerformed
-
-    private void btnOSDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSDeleteActionPerformed
-        // chamando o metodo remover
-        remover();
-    }//GEN-LAST:event_btnOSDeleteActionPerformed
-
-    private void btnOSCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSCalcActionPerformed
-        calculaKm();
-    }//GEN-LAST:event_btnOSCalcActionPerformed
-
-    private void btnOSReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSReadActionPerformed
-        //  chamando o metodo consultar
-        consultar();
-    }//GEN-LAST:event_btnOSReadActionPerformed
-
-    private void btnOSUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSUpdateActionPerformed
-        // chamando o metodo alterar
-        alterar();
-    }//GEN-LAST:event_btnOSUpdateActionPerformed
-
-    private void btnCliImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliImActionPerformed
-        // chamando o metodo imprimir_es
-        imprimir_es();
-    }//GEN-LAST:event_btnCliImActionPerformed
-
-    private void btnOSCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSCreateActionPerformed
-        // chamando o metodo adicionar
-        adicionar();
-    }//GEN-LAST:event_btnOSCreateActionPerformed
-
-    private void cbOSPlItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbOSPlItemStateChanged
-        // TODO add your handling code here:
-        //getDadosForm();
-        // getCbDados();
-    }//GEN-LAST:event_cbOSPlItemStateChanged
-
-    private void cbOSPlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbOSPlMouseClicked
-        // TODO add your handling code here:
-        km();
-    }//GEN-LAST:event_cbOSPlMouseClicked
-
-    private void cbOSPlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOSPlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbOSPlActionPerformed
-
-    private void cbOsSitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbOsSitMouseClicked
-        // chamando o metodo de data e hora
-        getCbDados();
-        //getDadosForm();
-    }//GEN-LAST:event_cbOsSitMouseClicked
-
-    private void cbOsSitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOsSitActionPerformed
-
-    }//GEN-LAST:event_cbOsSitActionPerformed
 
     private void txtCliPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCliPesquisarActionPerformed
         // TODO add your handling code here:
@@ -813,6 +775,64 @@ private  void getCbDados()
     private void txtOsEsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtOsEsMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOsEsMouseClicked
+
+    private void cbOSPlItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbOSPlItemStateChanged
+        // TODO add your handling code here:
+        //getDadosForm();
+        // getCbDados();
+    }//GEN-LAST:event_cbOSPlItemStateChanged
+
+    private void cbOSPlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbOSPlMouseClicked
+        // TODO add your handling code here:
+        km();
+    }//GEN-LAST:event_cbOSPlMouseClicked
+
+    private void cbOSPlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOSPlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbOSPlActionPerformed
+
+    private void txtOSSaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOSSaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOSSaiActionPerformed
+
+    private void cbOsSitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbOsSitMouseClicked
+        // chamando o metodo de data e hora
+        getCbDados();
+        //getDadosForm();
+    }//GEN-LAST:event_cbOsSitMouseClicked
+
+    private void cbOsSitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOsSitActionPerformed
+
+    }//GEN-LAST:event_cbOsSitActionPerformed
+
+    private void btnOSCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSCreateActionPerformed
+        // chamando o metodo adicionar
+        adicionar();
+    }//GEN-LAST:event_btnOSCreateActionPerformed
+
+    private void btnCliImActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliImActionPerformed
+        // chamando o metodo imprimir_es
+        imprimir_es();
+    }//GEN-LAST:event_btnCliImActionPerformed
+
+    private void btnOSCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSCalcActionPerformed
+        calculaKm();
+    }//GEN-LAST:event_btnOSCalcActionPerformed
+
+    private void btnOSUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSUpdateActionPerformed
+        // chamando o metodo alterar
+        alterar();
+    }//GEN-LAST:event_btnOSUpdateActionPerformed
+
+    private void btnOSDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSDeleteActionPerformed
+        // chamando o metodo remover
+        remover();
+    }//GEN-LAST:event_btnOSDeleteActionPerformed
+
+    private void btnOSReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSReadActionPerformed
+        //  chamando o metodo consultar
+        consultar();
+    }//GEN-LAST:event_btnOSReadActionPerformed
 
     /**
      * @param args the command line arguments

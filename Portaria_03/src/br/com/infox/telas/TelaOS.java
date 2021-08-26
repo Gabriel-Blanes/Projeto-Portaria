@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -20,7 +21,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    private String tipo;
+  
 
     public TelaOS() {
         initComponents();
@@ -42,7 +43,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
             tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -84,20 +85,12 @@ public class TelaOS extends javax.swing.JInternalFrame {
               if (adicionado > 0) {
                   JOptionPane.showMessageDialog(null, "Entrada e Saida da frota adicionada com sucesso!");
                   
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-                  
-                   txtCliid.setText(null);
+                 limpar();
               }
           }
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
     }
 
@@ -130,12 +123,12 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "E/S da frota não cadastrada!");
 
             }
-        } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e) {
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "E/S  de frota invalida!");
             //System.out.println(e);
 
-        } catch (HeadlessException | SQLException m) {
-            JOptionPane.showMessageDialog(null, m);
+        } catch (Exception m) {
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +m);
         }
     }
 
@@ -168,17 +161,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Dados de Entrada e Saida da frota alteradas com sucesso!");
                       
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-             
-              
-             
-                    txtCliid.setText(null);
+                   limpar();
 
                     btnOSCreate.setEnabled(true);
                     txtCliPesquisar.setEnabled(true);
@@ -187,7 +170,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
             }
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
         }
 
     }
@@ -205,15 +188,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Dados de Entrada e Saida da frota Removidas com sucesso!");
                 }
                 
-                     txtOsEs.setText(null);
-                     txtOSDest.setText(null);
-                     txtOSKmE.setText(null);
-                     txtOSKmS.setText(null);
-                     txtOSKmR.setText(null);
-                     txtOSEn.setText(null);
-                     txtOSSai.setText(null);
-             
-                    txtCliid.setText(null);
+               limpar();
                     
                 btnOSCreate.setEnabled(true);
                 txtCliPesquisar.setEnabled(true);
@@ -221,7 +196,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
             } catch (HeadlessException | SQLException e) {
 
-                JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
 
         }
@@ -243,7 +218,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 //a linha abaixo exibe o relatório através da classe JasperViewer
              JasperViewer.viewReport(print,false);                  
             } catch (NumberFormatException | JRException e) {
-                JOptionPane.showMessageDialog(null, e);
+                 JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
             }
         }
      
@@ -255,7 +230,7 @@ private  void km()
         
                String placa = cbOSPl.getSelectedItem().toString(); //aqui estou pegando a variavel do combobox
 
-      String sql = "select max(en_km_en), max(en_km_sai) "
+      String sql = "select max(en_km_sai), max(en_km_en) "
                     +"from entrada_saida " 
                     +"where en_placa_modelo = ?;"; //select para executar as funções max
 
@@ -266,22 +241,31 @@ private  void km()
         {
             //caso de certo, true, pega o resultado, que é o resultSet do banco e seta nos campos os valores
             //da query 
-            txtOSKmE.setText(rs.getString(1)); 
-            txtOSKmS.setText(rs.getString(2));
+             txtOSKmS.setText(rs.getString(1));
+            txtOSKmE.setText(rs.getString(2)); 
+          
 
         }
         
         
-    } catch (Exception e) {
+    } catch (SQLException e) {
+         JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
     }
 
 } 
   private void calculaKm()
   {
+      try{
       Double kmEntrada =  Double.parseDouble(txtOSKmE.getText());
       Double kmSaida = Double.parseDouble(txtOSKmS.getText());
       Double kmResultado = kmEntrada - kmSaida;
       txtOSKmR.setText(kmResultado.toString());
+           
+      } catch (NumberFormatException e) {
+        
+       JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
+    }
+
   }
         
 private  void getCbDados()
@@ -318,12 +302,29 @@ private  void getCbDados()
     }
   catch(Exception e)
     {
-    
+  JOptionPane.showMessageDialog(null,"Ocorreu um erro:" +e);
     }
        
        
     }
 
+private void limpar(){
+    
+                    txtCliPesquisar.setText(null);
+                     txtOsEs.setText(null);
+                     txtOSDest.setText(null);
+                     txtOSKmE.setText(null);
+                     txtOSKmS.setText(null);
+                     txtOSKmR.setText(null);
+                     txtOSEn.setText(null);
+                     txtOSSai.setText(null);
+             
+                    txtCliid.setText(null);
+                     cbOSPl.setSelectedItem(null);
+                    cbOsSit.setSelectedItem(null);
+                    
+                    ((DefaultTableModel)tblClientes.getModel()).setRowCount(0);
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -728,6 +729,11 @@ private  void getCbDados()
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/pesquisar.png"))); // NOI18N
 
+        tblClientes = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIdenx, int colIndex){
+                return false;
+            }
+        };
         tblClientes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -754,6 +760,9 @@ private  void getCbDados()
                 return types [columnIndex];
             }
         });
+        tblClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblClientes.setFocusable(false);
+        tblClientes.getTableHeader().setReorderingAllowed(false);
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
@@ -827,6 +836,8 @@ private  void getCbDados()
                 .addContainerGap())
         );
 
+        btnOSCalc.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnOSCalc.setText("=");
         btnOSCalc.setToolTipText("Remover");
         btnOSCalc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnOSCalc.addActionListener(new java.awt.event.ActionListener() {
@@ -884,7 +895,7 @@ private  void getCbDados()
         });
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setText("*placa");
+        jLabel8.setText("*Placa");
 
         jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel20.setText("Km Rodado");
@@ -893,6 +904,7 @@ private  void getCbDados()
 
         cbOSPl.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOSPl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "EVA 2366 ÔNIX", "EXU 1948 ÔNIX", "FHE 1321 TOWNER", "FZH 0439 QQ", "FWF-7005 FIAT", " " }));
+        cbOSPl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbOSPl.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbOSPlItemStateChanged(evt);
@@ -913,6 +925,7 @@ private  void getCbDados()
 
         cbOsSit.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         cbOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Na planta", "Encerrada" }));
+        cbOsSit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbOsSit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbOsSitMouseClicked(evt);
@@ -959,7 +972,7 @@ private  void getCbDados()
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -1013,12 +1026,12 @@ private  void getCbDados()
                     .addGroup(layout.createSequentialGroup()
                         .addGap(208, 208, 208)
                         .addComponent(jLabel7)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 292, Short.MAX_VALUE)
+                    .addGap(0, 298, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 283, Short.MAX_VALUE)))
+                    .addGap(0, 290, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1059,15 +1072,11 @@ private  void getCbDados()
                             .addComponent(btnOSCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCliIm)
                             .addComponent(btnOSUpdate))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnOSCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnOSDelete)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(btnOSRead)))))
+                            .addComponent(btnOSCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnOSDelete)
+                            .addComponent(btnOSRead))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -1076,12 +1085,12 @@ private  void getCbDados()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtOSEn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 234, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 234, Short.MAX_VALUE)))
+                    .addGap(0, 235, Short.MAX_VALUE)))
         );
 
         pack();
